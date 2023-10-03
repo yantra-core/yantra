@@ -10,7 +10,7 @@ async function go() {
   await client.connect('my-world');
 
   // create a new physics body by inserting a new state object into the world
-  await client.create({
+  client.create({
     id: 'game-ball',    // id is optional, will auto-id if not provided
     type: 'BODY',       // type is required, BODY is a generic physics body
     shape: 'rectangle', // shape or points are required for Bodies, defaults to 'rectangle`
