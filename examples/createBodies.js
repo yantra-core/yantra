@@ -1,4 +1,4 @@
-import yantra from '../sdk.js';
+import yantra from '@yantra-core/sdk';
 
 let client = yantra.createClient({
   owner: 'Marak'
@@ -22,9 +22,6 @@ async function go() {
     mass: 500,          // mass is required, defaults to 9001
     emitCollisionEvents: true // emitCollisionEvents is optional, defaults to false
   });
-
-
-
 
 }
 
