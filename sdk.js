@@ -1,10 +1,13 @@
 import onServerMessage from './lib/core/onServerMessage.js';
 import createWorld from './lib/createWorld.js';
 import create from './lib/state/create.js';
+import set from './lib/state/set.js';
 import autoscale from './lib/autoscale.js';
 import applyForce from './lib/state/applyForce.js';
 import setVelocity from './lib/state/setVelocity.js';
 import update from './lib/state/update.js';
+import setConfig from './lib/state/setConfig.js';
+
 import ws from 'ws';
 
 /**
@@ -47,6 +50,7 @@ function YantraClient(options) {
   this.region = 'Washington_DC';
   this.world = {};
   this.cache = {};
+  this.pushStateCache = [];
 
   options.worker = false;
 
@@ -87,7 +91,11 @@ YantraClient.prototype.onServerMessage = onServerMessage;
  * @memberof YantraClient
  * @param {Object} state - The initial state of the entity to be created.
  */
-YantraClient.prototype.create = create;
+YantraClient.prototype.create = create; // currently acts as update / create, TODO: should throw error if id exists
+// TODO: YantraClient.prototype.set(state) - acts as update / create, id optional
+YantraClient.prototype.set = set;
+YantraClient.prototype.config = setConfig;
+
 
 /**
  * Updates the state of an entity identified by `bodyId`.
@@ -201,6 +209,13 @@ YantraClient.prototype.connect = async function (worldId) {
     console.log('calling autoscaler');
     let world = await this.autoscale(this.region, this.owner, worldId)
     console.log('wwww', world[0])
+    this.worldConfig = world[0];
+
+
+    if (this.worldConfig.processInfo.room) {
+      this.worldConfig.room = this.worldConfig.processInfo.room; // legacy API
+    } 
+
     wsConnectionString = world[0].processInfo.wsConnectionString;
   }
   this.connectAttempts++;
@@ -290,6 +305,24 @@ YantraClient.prototype.disconnect = function () {
  * client.sendJSON({ key: 'value' });
  */
 YantraClient.prototype.sendJSON = function (json) {
+  // if creator_json, reroute to sendState instead
+  if (this.serverConnection) {
+    if (json.event === 'creator_json') {
+      this.pushStateCache.push(json);
+    } else {
+      this.serverConnection.send(JSON.stringify(json));
+    }
+  }
+  return this;
+}
+
+// another approach is to not send creator_json until gamestate event /
+// only send one creator_json per gamestate event
+// that would ensure fixed order of creator_json and gamestate events
+// similiar to sendJSON, but sends buffered state array
+// buffers state for 1 ms, then sends
+// this is to prevent sending state too often
+YantraClient.prototype.sendState = function (json) {
   if (this.serverConnection) {
     this.serverConnection.send(JSON.stringify(json));
   }
@@ -303,6 +336,7 @@ YantraClient.prototype._onOpen = function (wsConnectionString) {
   console.log('WebSocket connection opened ' + wsConnectionString);
   // serverSettings.paused = false;
   this.emit('open');
+  this.emit('connect', this);
 };
 
 YantraClient.prototype._onError = function (wsConnectionString) {
@@ -367,9 +401,10 @@ YantraClient.prototype.on = function (event, fn) {
  * client.emit('update', { key: 'value' });
  */
 YantraClient.prototype.emit = function (event, data) {
+  let self = this;
   if (this.events[event]) {
     this.events[event].forEach(function (fn) {
-      fn(data);
+      fn.call(self, data);
     });
   }
 }

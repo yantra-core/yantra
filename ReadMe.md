@@ -110,6 +110,36 @@ client.sendJSON({
 });
 ```
 
+
+# Building your Game on Yantra
+
+## Quick Start
+
+### In-Browser Development:
+- **Editor**: Use our browser-based Monaco Editor.
+- **Run**: Click "Run" to test your code against our servers.
+- **Save**: Click "Save" to store your code in our database.
+
+### Local Development:
+- Import the `@yantra-core/sdk` in your code.
+- Your game logic subscribes to the game state. Modify the state in response to each tick for dynamic gameplay.
+
+## Important:
+
+- **No External Dependencies**: Your code should run without requiring any external libraries or packages.
+- **SDK Connection**: When on our servers, `@yantra-core/sdk` auto-connects to the right localhost and port.
+
+
+## Running in Yantra's Environment:
+
+When you upload your code to Yantra, it's executed in our optimized low-latency environment. Here's what you should know:
+
+- **High Performance**: Yantra's backend is fine-tuned to ensure your game logic runs smoothly.
+- **Consistent Framerate**: We prioritize a consistent, high framerate, ensuring your gameplay is fluid and responsive.
+- **Direct Execution**: Your uploaded code runs directly, 1:1, with no modifications or external dependencies. The performance you see locally will mirror what you get in our cloud environment.
+
+
+
 ## Support
 
 For issues, bugs, or feedback, please [open an issue on our GitHub repository](https://github.com/yantra-core/sdk) or visit us in our [Discord](https://discord.gg/MWyfw5xVHH)
