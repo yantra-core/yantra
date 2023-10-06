@@ -8,6 +8,8 @@ import setVelocity from './lib/state/setVelocity.js';
 import update from './lib/state/update.js';
 import setConfig from './lib/state/setConfig.js';
 import deployWorld from './lib/world/deployWorld.js';
+import zipWorld from './lib/world/zipWorld.js';
+import listWorlds from './lib/world/listWorlds.js';
 
 import ws from 'ws';
 
@@ -97,6 +99,8 @@ YantraClient.prototype.create = create; // currently acts as update / create, TO
 YantraClient.prototype.set = set;
 YantraClient.prototype.config = setConfig;
 YantraClient.prototype.deploy = deployWorld;
+YantraClient.prototype.zip = zipWorld;
+YantraClient.prototype.list = listWorlds;
 
 
 /**

@@ -4,7 +4,8 @@
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "main": "sdk.js",
   "bin": {
-    "yantra": "node ./bin/yantra.js"
+    "yantra": "node ./bin/yantra.js",
+    "yantra-deploy": "node ./bin/yantra-deploy.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +17,11 @@
     "archiver": "^6.0.1",
     "avsc": "^5.7.7",
     "axios": "^1.5.1",
+    "cli-progress": "^3.12.0",
+    "commander": "^11.0.0",
     "form-data": "^4.0.0",
+    "inquirer": "^9.2.11",
+    "minimist": "^1.2.8",
     "ws": "^8.14.2"
   }
 }
