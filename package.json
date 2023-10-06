@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "main": "sdk.js",
+  "bin": {
+    "yantra": "node ./bin/yantra.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +13,10 @@
   "author": "",
   "license": "Copyright Yantra Core 2023",
   "dependencies": {
+    "archiver": "^6.0.1",
     "avsc": "^5.7.7",
     "axios": "^1.5.1",
+    "form-data": "^4.0.0",
     "ws": "^8.14.2"
   }
 }

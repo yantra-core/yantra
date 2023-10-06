@@ -1,5 +1,5 @@
 import onServerMessage from './lib/core/onServerMessage.js';
-import createWorld from './lib/createWorld.js';
+import createWorld from './lib/world/createWorld.js';
 import create from './lib/state/create.js';
 import set from './lib/state/set.js';
 import autoscale from './lib/autoscale.js';
@@ -7,6 +7,7 @@ import applyForce from './lib/state/applyForce.js';
 import setVelocity from './lib/state/setVelocity.js';
 import update from './lib/state/update.js';
 import setConfig from './lib/state/setConfig.js';
+import deployWorld from './lib/world/deployWorld.js';
 
 import ws from 'ws';
 
@@ -95,6 +96,7 @@ YantraClient.prototype.create = create; // currently acts as update / create, TO
 // TODO: YantraClient.prototype.set(state) - acts as update / create, id optional
 YantraClient.prototype.set = set;
 YantraClient.prototype.config = setConfig;
+YantraClient.prototype.deploy = deployWorld;
 
 
 /**
