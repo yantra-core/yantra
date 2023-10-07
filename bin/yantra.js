@@ -25,15 +25,21 @@ console.log(yantraAsciiArt)
 
 let owner = 'AYYO-ALPHA-0';
 
-// Subcommand: deploy
+program
+  .command('login')
+  .description('Login to Yantra using OTP or create an account if it does not exist')
+
+
 program
   .command('deploy', 'Deploy your physics world')
 
-// Subcommand: worlds
 program
   .command('list', 'List your worlds')
 
-program.parse(process.argv);
+program
+  .command('init', 'Initialize a new world in the current directory')
+
+  program.parse(process.argv);
 
 if (process.argv.length === 2) {
   program.outputHelp();
