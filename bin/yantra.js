@@ -27,13 +27,11 @@ program
   .command('clone', 'Clone a world from the Yantra library')
   .command('deploy', 'Deploy your physics world')
   .command('list', 'List your worlds')
+  .command('rm', 'Remove a world')
   .command('whoami', 'Display the current user')
   .command('login', 'Login to Yantra using OTP or create an account if it does not exist')
   .command('logout', 'Logs CLI client out of Yantra')
 
-
-
-  
 
   if (process.argv.length <= 2 || program.args.includes('--help') || program.args.includes('-h')) {
     console.log(yantraAsciiArt);

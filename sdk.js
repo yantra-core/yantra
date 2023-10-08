@@ -1,5 +1,6 @@
 import onServerMessage from './lib/core/onServerMessage.js';
 import createWorld from './lib/world/createWorld.js';
+import removeWorld from './lib/world/removeWorld.js';
 import create from './lib/state/create.js';
 import set from './lib/state/set.js';
 import autoscale from './lib/autoscale.js';
@@ -203,6 +204,8 @@ YantraClient.prototype.setVelocity = setVelocity;
  * yantraClientInstance.createWorld(worldId, worldConfig);
  */
 YantraClient.prototype.createWorld = createWorld;
+YantraClient.prototype.removeWorld = removeWorld;
+
 
 /**
  * Asynchronously establishes a connection to a specified world.

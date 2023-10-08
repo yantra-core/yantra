@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 const tokenPath = path.resolve(__dirname + '/../config/token.json');
 
-async function displayWorlds() {
+async function go() {
     // Check for existence of token and extract the owner
     if (!existsSync(tokenPath)) {
         console.log('You are not currently logged in.');
@@ -21,7 +21,9 @@ async function displayWorlds() {
     const tokenContent = JSON.parse(readFileSync(tokenPath, 'utf-8'));
     const owner = tokenContent.account;
 
-    const client = yantra.createClient({});
+    const client = yantra.createClient({
+      // TODO: token: tokenContent.token,
+    });
     const worlds = await client.list(owner);
     if (worlds.length === 0) {
       console.log(owner, 'has not created any worlds yet...');
@@ -34,4 +36,4 @@ async function displayWorlds() {
 }
 
 // Invoke the function to display worlds
-displayWorlds();
+go();
