@@ -7,9 +7,8 @@ import minimist from 'minimist';
 const program = new Command();
 
 program
-  .version('0.0.1') // You can set your CLI version here
-  .description('Yantra Serverless Physics Platform CLI')
-
+  .version('0.0.2') // You can set your CLI version here
+  .description('Yantra Serverless Physics Platform CLI');
 
 const yantraAsciiArt = `
   __     __         _                _____ _      _____ 
@@ -21,26 +20,26 @@ const yantraAsciiArt = `
                                                         
  `;
 
-console.log(yantraAsciiArt)
-
 let owner = 'AYYO-ALPHA-0';
 
 program
-  .command('login')
-  .description('Login to Yantra using OTP or create an account if it does not exist')
-
-
-program
-  .command('deploy', 'Deploy your physics world')
-
-program
-  .command('list', 'List your worlds')
-
-program
   .command('init', 'Initialize a new world in the current directory')
+  .command('clone', 'Clone a world from the Yantra library')
+  .command('deploy', 'Deploy your physics world')
+  .command('list', 'List your worlds')
+  .command('whoami', 'Display the current user')
+  .command('login', 'Login to Yantra using OTP or create an account if it does not exist')
+  .command('logout', 'Logs CLI client out of Yantra')
 
-  program.parse(process.argv);
 
-if (process.argv.length === 2) {
-  program.outputHelp();
+
+  
+
+  if (process.argv.length <= 2 || program.args.includes('--help') || program.args.includes('-h')) {
+    console.log(yantraAsciiArt);
+    program.outputHelp();
+  } else {
+    program.parse(process.argv);
 }
+  
+
