@@ -2,22 +2,31 @@ import config from '../config/config.js';
 import { existsSync, writeFileSync } from 'fs';
 import inquirer from 'inquirer';
 import axios from 'axios';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let etherspaceEndpoint = config.etherspaceEndpoint;
 
 async function go() {
+
   // Check for existence of token
-  const tokenPath = './config/token.json';
+  const tokenPath = path.resolve(__dirname + '/../config/token.json');
+
+  /* Remark: Better just to start new login instead of throwing error
   if (existsSync(tokenPath)) {
-    // console.log('You are already logged in.');
-    // return;
-  }
+    console.log('You are already logged in.');
+    return;
+  } */
 
   // Prompt for account name first
   const { name } = await inquirer.prompt([{
     type: 'input',
     name: 'name',
     message: 'Enter your account name:',
+    prefix: '',
   }]);
 
   // Make a call to the etherspace endpoint with the account name
@@ -36,6 +45,7 @@ async function go() {
       type: 'input',
       name: 'email',
       message: 'Enter your email address:',
+      prefix: '',
       validate: input => input.includes('@') ? true : 'Please enter a valid email address.'
     }]);
 
@@ -57,6 +67,7 @@ async function go() {
     type: 'input',
     name: 'otp',
     message: 'Enter the OTP sent to your email:',
+    prefix: ''
   }]);
 
   // Send OTP for verification

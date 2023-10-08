@@ -5,7 +5,12 @@
   "main": "sdk.js",
   "bin": {
     "yantra": "node ./bin/yantra.js",
-    "yantra-deploy": "node ./bin/yantra-deploy.js"
+    "yantra-init": "node ./bin/yantra-init.js",
+    "yantra-list": "node ./bin/yantra-list.js",
+    "yantra-login": "node ./bin/yantra-login.js",
+    "yantra-logout": "node ./bin/yantra-logout.js",
+    "yantra-deploy": "node ./bin/yantra-deploy.js",
+    "yantra-whoami": "node ./bin/yantra-whoami.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

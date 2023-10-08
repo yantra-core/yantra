@@ -13,6 +13,20 @@ import listWorlds from './lib/world/listWorlds.js';
 
 import ws from 'ws';
 
+import { existsSync, readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const tokenPath = path.resolve(__dirname + '/config/token.json');
+
+let inBrowser = false;
+if (typeof window !== 'undefined') {
+  inBrowser = true;
+}
+
+
 /**
  * @namespace sdk
  */
@@ -31,6 +45,23 @@ const sdk = {};
  * @returns {YantraClient} - A new YantraClient instance.
  */
 sdk.createClient = function createClient(options) {
+
+  if (!inBrowser) {
+    // load the contents of the token file pass in accessToken and owner name
+    // TODO: add process.ENV.YANTRA_TOKEN support
+    if (existsSync(tokenPath)) {
+      const tokenContent = JSON.parse(readFileSync(tokenPath, 'utf-8'));
+      options.accessToken = tokenContent.accessToken;
+      options.owner = tokenContent.account;
+      console.log('found token.json file, using local settings', options.owner);
+    } else {
+      console.log(tokenPath, 'not found')
+      //console.log('You are not currently logged in.');
+      //console.log('Run `yantra login` to login to Yantra.');
+    }
+  }
+  
+
   return new YantraClient(options);
 }
 
