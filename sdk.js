@@ -11,6 +11,9 @@ import setConfig from './lib/state/setConfig.js';
 import deployWorld from './lib/world/deployWorld.js';
 import zipWorld from './lib/world/zipWorld.js';
 import listWorlds from './lib/world/listWorlds.js';
+import setWorld from './lib/world/setWorld.js';
+import getWorld from './lib/world/getWorld.js';
+import updateWorld from './lib/world/updateWorld.js';
 
 import ws from 'ws';
 
@@ -205,7 +208,9 @@ YantraClient.prototype.setVelocity = setVelocity;
  */
 YantraClient.prototype.createWorld = createWorld;
 YantraClient.prototype.removeWorld = removeWorld;
-
+YantraClient.prototype.setWorld = setWorld;
+YantraClient.prototype.getWorld = getWorld;
+YantraClient.prototype.updateWorld = updateWorld;
 
 /**
  * Asynchronously establishes a connection to a specified world.
