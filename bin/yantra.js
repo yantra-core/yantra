@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import yantra from '@yantra-core/sdk';
+import yantra from '../sdk.js';
 import minimist from 'minimist';
 
 const program = new Command();

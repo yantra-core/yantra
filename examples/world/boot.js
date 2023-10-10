@@ -22,9 +22,7 @@ async function go () {
   //client.on('collision', pong.collision);
   client.on('gamestate', world.tick);
 
-  await client.connect({
-    wsConnectionString: 'ws://127.0.0.1:8888'
-  });
+  await client.connect();
   
 };
 
