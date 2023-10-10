@@ -14,6 +14,7 @@ import listWorlds from './lib/world/listWorlds.js';
 import setWorld from './lib/world/setWorld.js';
 import getWorld from './lib/world/getWorld.js';
 import updateWorld from './lib/world/updateWorld.js';
+import minimist from 'minimist';
 
 import ws from 'ws';
 
@@ -254,8 +255,14 @@ YantraClient.prototype.connect = async function (worldId) {
 
   // Remark: `process.env.YANTRA_ENV` is set in production to override connect to local websocket server 
   //          This is to ensure low-latency, as the custom world code is run on the same host as the game server
-  if (process.env.YANTRA_ENV === 'prod') {
-    console.log('YantraClient Production Mode Detected. Connecting to local websocket server.');
+  // Parse command-line arguments
+  const argv = minimist(process.argv.slice(2));
+
+  // Check for the YANTRA_ENV value
+  const yantraEnv = argv.env || 'prod'; // Default to 'prod' if not provided
+
+  if (yantraEnv === 'cloud') {
+    console.log('YantraClient Cloud Mode Detected. Connecting to local websocket server.');
     worldId = {
       wsConnectionString: 'ws://127.0.0.1:8888'
     };
