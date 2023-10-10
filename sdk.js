@@ -55,7 +55,7 @@ sdk.createClient = function createClient(options) {
     // TODO: add process.ENV.YANTRA_TOKEN support
     if (existsSync(tokenPath)) {
       const tokenContent = JSON.parse(readFileSync(tokenPath, 'utf-8'));
-      options.accessToken = tokenContent.accessToken;
+      options.accessToken = tokenContent.token;
       options.owner = tokenContent.account;
       console.log('found token.json file, using local settings', options.owner);
     } else {
@@ -64,7 +64,6 @@ sdk.createClient = function createClient(options) {
       //console.log('Run `yantra login` to login to Yantra.');
     }
   }
-  
 
   return new YantraClient(options);
 }
@@ -108,6 +107,10 @@ function YantraClient(options) {
 
   if (options.etherspaceEndpoint) {
     this.etherspaceEndpoint = options.etherspaceEndpoint;
+  }
+
+  if (options.accessToken) {
+    this.accessToken = options.accessToken;
   }
 
   if (options.worker) {
