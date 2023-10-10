@@ -10,7 +10,7 @@ Visit: https://yantra.gg for a free account
 Install the SDK via npm:
 
 ```bash
-npm install @yantra-core/sdk
+npm install -g @yantra-core/sdk
 ```
 
 ## Features
@@ -22,7 +22,39 @@ npm install @yantra-core/sdk
 - **Event Handling**: React to various events and server messages.
 - **Auto-scaling**: Automatically scale resources for a given world in a specific region.
 
-## Usage
+
+## CLI Quick Start
+
+**Login / Register Account**
+```bash
+yantra login
+```
+
+**Init and start a new World Boilerplate**
+```bash
+mkdir my-world
+cd my-world
+yantra init
+npm start
+```
+
+**Clone existing Yantra World and start**
+
+```bash
+yantra clone pong
+cd pong
+npm start
+```
+
+**Deploy World from localhost to cloud**
+
+```bash
+yantra clone snake
+cd snake
+yantra deploy
+```
+
+## SDK Usage
 
 ### Importing the SDK
 
