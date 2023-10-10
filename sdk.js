@@ -264,7 +264,7 @@ YantraClient.prototype.connect = async function (worldId) {
   if (yantraEnv === 'cloud') {
     console.log('YantraClient Cloud Mode Detected. Connecting to local websocket server.');
     worldId = {
-      wsConnectionString: 'ws://127.0.0.1:8888'
+      wsConnectionString: 'ws://127.0.0.1'
     };
   }
 
