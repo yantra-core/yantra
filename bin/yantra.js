@@ -7,7 +7,7 @@ import minimist from 'minimist';
 const program = new Command();
 
 program
-  .version('0.0.2') // You can set your CLI version here
+  .version('0.0.4') // You can set your CLI version here
   .description('Yantra Serverless Physics Platform CLI');
 
 const yantraAsciiArt = `

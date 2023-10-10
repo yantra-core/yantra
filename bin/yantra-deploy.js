@@ -88,7 +88,7 @@ async function go() {
   console.log('about to use', owner, worldName);
   // create empty world if doesn't exist
   try {
-    await client.createWorld(owner, worldName, localWorldConfig);
+    await client.setWorld(owner, worldName, localWorldConfig);
   } catch (err) {
     console.log(err);
   }

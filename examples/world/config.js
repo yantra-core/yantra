@@ -1,11 +1,13 @@
 let config = {
   "id": "my-world",
   "mode": "my-world",
+  "movement": "default", // optional, see ./examples/pong for custom movement example
+  "border": "rect",      // optional, will automatically create a solid / static / impassable border around map size
   "width": 2560,
   "height": 1440,
   "gravity": {
     "x": 0,
-    "y": -0.5
+    "y": 0.5
   },
   "maxPlayers": 44,
   "player": {
