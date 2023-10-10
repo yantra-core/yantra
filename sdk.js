@@ -251,6 +251,15 @@ YantraClient.prototype.updateWorld = updateWorld;
 YantraClient.prototype.connect = async function (worldId) {
 
   let wsConnectionString;
+
+  // Remark: `process.env.YANTRA_ENV` is set in production to override connect to local websocket server 
+  //          This is to ensure low-latency, as the custom world code is run on the same host as the game server
+  if (process.env.YANTRA_ENV === 'prod') {
+    worldId = {
+      wsConnectionString: 'ws://127.0.0.1:8888'
+    };
+  }
+
   if (typeof worldId === 'object') {
     wsConnectionString = worldId.wsConnectionString;
   } else {
