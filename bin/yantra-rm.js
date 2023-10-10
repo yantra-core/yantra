@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import yantra from '@yantra-core/sdk';
 import inquirer from 'inquirer';
 import { existsSync, readFileSync } from 'fs';

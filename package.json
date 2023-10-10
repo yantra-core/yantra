@@ -4,13 +4,13 @@
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "main": "sdk.js",
   "bin": {
-    "yantra": "node ./bin/yantra.js",
-    "yantra-init": "node ./bin/yantra-init.js",
-    "yantra-list": "node ./bin/yantra-list.js",
-    "yantra-login": "node ./bin/yantra-login.js",
-    "yantra-logout": "node ./bin/yantra-logout.js",
-    "yantra-deploy": "node ./bin/yantra-deploy.js",
-    "yantra-whoami": "node ./bin/yantra-whoami.js"
+    "yantra": "./bin/yantra.js",
+    "yantra-init": "./bin/yantra-init.js",
+    "yantra-list": "./bin/yantra-list.js",
+    "yantra-login": "./bin/yantra-login.js",
+    "yantra-logout": "./bin/yantra-logout.js",
+    "yantra-deploy": "./bin/yantra-deploy.js",
+    "yantra-whoami": "./bin/yantra-whoami.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
