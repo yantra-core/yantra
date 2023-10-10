@@ -1,6 +1,11 @@
 import { existsSync, unlinkSync } from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const tokenPath = './config/token.json';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const tokenPath = path.resolve(__dirname + '/../config/token.json');
 
 function logout() {
   if (existsSync(tokenPath)) {

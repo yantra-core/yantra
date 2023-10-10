@@ -106,6 +106,10 @@ function YantraClient(options) {
     this.region = options.region;
   }
 
+  if (options.etherspaceEndpoint) {
+    this.etherspaceEndpoint = options.etherspaceEndpoint;
+  }
+
   if (options.worker) {
     this.useWorker = true;
     this.worker = new Worker('./worker.js');
