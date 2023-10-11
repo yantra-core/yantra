@@ -64,11 +64,6 @@ yantra deploy
 import sdk from '@yantra-core/sdk';
 ```
 
-### Requiring the Node SDK
-```javascript
-let sdk = require('@yantra-core/sdk');
-```
-
 ### Importing the Browser SDK
 
 ```javascript
