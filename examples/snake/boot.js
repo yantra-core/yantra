@@ -1,5 +1,5 @@
 import config from './config.js';
-import yantra from '@yantra-core/sdk';
+import yantra from '@yantra-core/sdk/sdk.js';
 import snake from './snake.js';
 
 let Y = yantra.createClient({});
@@ -21,7 +21,7 @@ async function go () {
   
   Y.on('connect', snake.init);
 
-  await Y.connect();
+  await Y.connect('snake');
 
   Y.config(config);
 

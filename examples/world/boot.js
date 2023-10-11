@@ -1,4 +1,4 @@
-import yantra from '@yantra-core/sdk';
+import yantra from '@yantra-core/sdk/sdk.js';
 import world from './world.js';
 import config from './config.js';
 

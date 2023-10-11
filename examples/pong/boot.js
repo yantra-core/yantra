@@ -1,4 +1,4 @@
-import yantra from '@yantra-core/sdk';
+import yantra from '@yantra-core/sdk/sdk.js';
 import pong from './pong.js';
 import config from './config.js';
 
