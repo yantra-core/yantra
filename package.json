@@ -3,6 +3,14 @@
   "version": "0.0.4",
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "main": "sdk.js",
+  "exports": {
+    ".": {
+      "import": "./sdk-browser.js",
+      "require": "./sdk-node.js",
+      "node": "./sdk.js"
+    },
+    "./": "./"
+  },
   "bin": {
     "yantra": "./bin/yantra.js",
     "yantra-init": "./bin/yantra-init.js",
