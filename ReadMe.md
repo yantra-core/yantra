@@ -27,20 +27,21 @@ npm install -g @yantra-core/sdk
 ## CLI Quick Start
 
 **Login / Register Account**
+*Login with existing account name or register new account by email address*
 ```bash
 yantra login
 ```
 
-**Init and start a new World Boilerplate**
+**Initialize and a new World**
+*Installs base template for World development and deployment*
 ```bash
 mkdir my-world
 cd my-world
 yantra init
-npm start
 ```
 
-**Clone existing Yantra World and start**
-
+**Clone existing Yantra World**
+*Installs a pre-made World into current directory. Type `yantra clone` to view available Worlds*
 ```bash
 yantra clone pong
 cd pong
@@ -48,7 +49,7 @@ npm start
 ```
 
 **Deploy World from localhost to cloud**
-
+*Deploys local world to Yantra Cloud. Provides a default game client link via ayyo.gg*
 ```bash
 yantra clone snake
 cd snake
@@ -57,10 +58,21 @@ yantra deploy
 
 ## SDK Usage
 
-### Importing the SDK
+### Importing the Node SDK
 
 ```javascript
 import sdk from '@yantra-core/sdk';
+```
+
+### Requiring the Node SDK
+```javascript
+let sdk = require('@yantra-core/sdk');
+```
+
+### Importing the Browser SDK
+
+```javascript
+import sdk from '@yantra-core/sdk/sdk-browser.js';
 ```
 
 ### Creating a Yantra Client
