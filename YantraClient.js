@@ -99,8 +99,9 @@ YantraClient.prototype.onServerMessage = onServerMessage;
  * @param {Object} state - The initial state of the entity to be created.
  */
 YantraClient.prototype.create = create; // currently acts as update / create, TODO: should throw error if id exists
-// TODO: YantraClient.prototype.set(state) - acts as update / create, id optional
 YantraClient.prototype.set = set;
+// Implement remove as wrapper to set with destroy: true property
+// TODO: YantraClient.prototype.remove = remove;
 YantraClient.prototype.config = setConfig;
 
 /*
@@ -217,6 +218,10 @@ YantraClient.prototype.connect = async function (worldId) {
 
   let wsConnectionString;
 
+  if (typeof worldId === 'undefined') {
+    throw new Error('worldId is required for YantraClient.connect(worldId)');
+  }
+
   // Remark: `process.env.YANTRA_ENV` is set in production to override connect to local websocket server 
   //          This is to ensure low-latency, as the custom world code is run on the same host as the game server
   // Parse command-line arguments
@@ -237,16 +242,13 @@ YantraClient.prototype.connect = async function (worldId) {
   if (typeof worldId === 'object') {
     wsConnectionString = worldId.wsConnectionString;
   } else {
-    // needs to lookup worldId connection info from discovery server
-    console.log('perform world lookup in db');
-    // can we just straight into autoscale here?
-    // does autoscale verify if mode and owner exists?
-    console.log('calling autoscaler');
+    // Call into autoscaler to discover the websocket connection string
+    // This will either return an existing connection string, or create a new one
+    console.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
     let world = await this.autoscale(this.region, this.owner, worldId)
-    console.log('wwww', world[0])
     this.worldConfig = world[0];
-
-
+    console.log(world.length, 'server candidate(s) found');
+    console.log('Using best available server:', this.worldConfig.processInfo);
     if (this.worldConfig.processInfo.room) {
       this.worldConfig.room = this.worldConfig.processInfo.room; // legacy API
     } 

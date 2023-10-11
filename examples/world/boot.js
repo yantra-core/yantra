@@ -8,7 +8,7 @@ async function go () {
 
   // creates world if it doesnt already exist
   try {
-    await client.createWorld('my-world', config);
+    await client.setWorld('my-world', config);
   } catch (err) {
     console.log(err);
   }
@@ -20,7 +20,7 @@ async function go () {
   //client.on('collision', pong.collision);
   client.on('gamestate', world.tick);
 
-  await client.connect();
+  await client.connect('my-world');
   
 };
 

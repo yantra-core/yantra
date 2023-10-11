@@ -5,7 +5,7 @@ function createScoreboards(Y) {
     id: 'scoreboard-blue',
     type: 'TEXT',
     // kind: 'scoreboard',
-    text: '110',
+    text: '0',
     nickname: '0',
     x: -1000,
     y: 0
@@ -14,7 +14,7 @@ function createScoreboards(Y) {
     id: 'scoreboard-red',
     type: 'TEXT',
     // kind: 'scoreboard',
-    text: '022',
+    text: '0',
     nickname: '0',
     x: 1000,
     y: 0
