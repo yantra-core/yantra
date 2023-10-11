@@ -1,6 +1,6 @@
 {
   "name": "@yantra-core/sdk",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "main": "sdk.js",
   "exports": {
@@ -27,6 +27,7 @@
   "author": "",
   "license": "Copyright Yantra Core 2023",
   "dependencies": {
+    "@ljharb/through": "^2.3.9",
     "archiver": "^6.0.1",
     "avsc": "^5.7.7",
     "axios": "^1.5.1",
