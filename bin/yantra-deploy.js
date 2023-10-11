@@ -9,27 +9,22 @@ import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const localWorldConfigPath = path.resolve(process.cwd() + '/config.js');
 
-const tokenPath = path.resolve(__dirname + '/../config/token.json');
+const localWorldConfigPath = path.resolve(process.cwd() + '/config.js');
 
 let argv = min(process.argv.slice(2));
 var deployPath = argv._[0] || process.cwd();
 const excludes = ['.DS_Store', 'node_modules', 'package-lock.json'];
 
-// Load owner from token.json
-if (!fs.existsSync(tokenPath)) {
+let client = yantra.createClient({});
+
+if (!client.accessToken) {
   console.log('You are not currently logged in.');
   console.log('Run `yantra login` to login to Yantra.');
   process.exit(1);  // exit the process with an error status
 }
 
-const tokenContent = JSON.parse(fs.readFileSync(tokenPath, 'utf-8'));
-const owner = tokenContent.account;
-
-let client = yantra.createClient({
-  owner: owner // TODO: token: tokenContent.token,
-});
+let owner = client.owner;
 
 async function go() {
   // Prompt the user for the deploy path
@@ -63,7 +58,6 @@ async function go() {
   } else {
     console.log("Using local world configuration:", localWorldConfig);
   }
-
 
   /*
   // Load the game config from the config.js file in the deployPath
@@ -103,6 +97,7 @@ async function go() {
 
 go();
 
+// TODO: move to lib/
 async function getLocalWorldConfig() {
   console.log('localWorldConfigPath', localWorldConfigPath);
 

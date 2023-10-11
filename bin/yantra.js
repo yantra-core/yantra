@@ -3,11 +3,22 @@
 import { Command } from 'commander';
 import yantra from '../sdk.js';
 import minimist from 'minimist';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Constants for directory reference in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// reading the yantra sdk package.json to get version
+const packageJsonPath = path.join(__dirname, '../package.json');
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
 const program = new Command();
 
 program
-  .version('0.0.4') // You can set your CLI version here
+  .version(packageJson.version) // set from package.json
   .description('Yantra Serverless Physics Platform CLI');
 
 const yantraAsciiArt = `
@@ -31,7 +42,7 @@ program
   .command('whoami', 'Display the current user')
   .command('login', 'Login to Yantra using OTP or create an account if it does not exist')
   .command('logout', 'Logs CLI client out of Yantra')
-
+  // TODO: add 'recover' command to send all account names by email
 
   if (process.argv.length <= 2 || program.args.includes('--help') || program.args.includes('-h')) {
     console.log(yantraAsciiArt);

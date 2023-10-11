@@ -5,6 +5,7 @@ import inquirer from 'inquirer';
 import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import configManager from '../lib/configManager.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,7 +13,6 @@ const __dirname = path.dirname(__filename);
 let etherspaceEndpoint = config.etherspaceEndpoint;
 
 async function go() {
-
   // Check for existence of token
   const tokenPath = path.resolve(__dirname + '/../config/token.json');
 
@@ -83,15 +83,13 @@ async function go() {
     return;
   }
 
-  // Save the token
-  writeFileSync(tokenPath, JSON.stringify({ 
+  configManager.writeConfig({ 
     account: name,
     // email: tokenResponse.data.token,
     token: tokenResponse.data.token
-  }));
+  });
 
   console.log('Login successful!');
 }
 
-// ...
 go();

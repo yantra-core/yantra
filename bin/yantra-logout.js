@@ -2,19 +2,11 @@
 import { existsSync, unlinkSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const tokenPath = path.resolve(__dirname + '/../config/token.json');
+import configManager from '../lib/configManager.js';
 
 function logout() {
-  if (existsSync(tokenPath)) {
-    unlinkSync(tokenPath);
-    console.log('Logged out successfully.');
-  } else {
-    console.log('You are not currently logged in.');
-  }
+  configManager.unlinkConfig();
+  console.log('Logged out successfully.');
 }
 
 // Calling the logout function

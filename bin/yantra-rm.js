@@ -11,18 +11,20 @@ const argv = min(process.argv.slice(2));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const tokenPath = path.resolve(__dirname + '/../config/token.json');
+
 const deployPath = argv._[0] || process.cwd();
 
 async function go() {
-  if (!existsSync(tokenPath)) {
+
+  const client = yantra.createClient({});
+
+  if (!client.accessToken) {
     console.log('You are not currently logged in.');
     console.log('Run `yantra login` to login to Yantra.');
     return;
   }
-
-  const tokenContent = JSON.parse(readFileSync(tokenPath, 'utf-8'));
-  const owner = tokenContent.account;
+  
+  let owner = client.owner;
 
   const packageJsonPath = path.join(deployPath, 'package.json');
   if (!fs.existsSync(packageJsonPath)) {
@@ -32,8 +34,6 @@ async function go() {
 
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
   const worldName = packageJsonContent.name;
-
-  const client = yantra.createClient({});
 
   let removeWorldsAllByOwner = argv.all || false;
 
