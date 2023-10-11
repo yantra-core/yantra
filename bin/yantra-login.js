@@ -22,11 +22,13 @@ async function go() {
     return;
   } */
 
+  console.log('Welcome to Yantra. Login with your account name.');
+  console.log('If this is a new account, please enter your desired account name.');
   // Prompt for account name first
   const { name } = await inquirer.prompt([{
     type: 'input',
     name: 'name',
-    message: 'Enter your account name:',
+    message: 'Account name:',
     prefix: '',
   }]);
 
@@ -39,9 +41,9 @@ async function go() {
     return;
   }
 
-  console.log("response.data", response.data)
+  // console.log("response.data", response.data)
   if (response.data.status === 'NEEDS_ACCOUNT') {
-    console.log(name, 'does not exist. Please register with email.');
+    console.log(name, 'does not exist. Please enter email address to register account name.');
     const { email } = await inquirer.prompt([{
       type: 'input',
       name: 'email',

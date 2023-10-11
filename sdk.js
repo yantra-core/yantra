@@ -20,7 +20,7 @@ sdk.createClient = function createClient(options) {
     const tokenContent = JSON.parse(readFileSync(tokenPath, 'utf-8'));
     options.accessToken = tokenContent.token;
     options.owner = tokenContent.account;
-    console.log('found token.json file, using local settings', options.owner);
+    // console.log('found token.json file, using local settings', options.owner);
   } else {
     console.log(tokenPath, 'not found');
   }

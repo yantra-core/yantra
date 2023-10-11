@@ -20,6 +20,7 @@ npm install -g @yantra-core/sdk
 - **Entity Management**: Create and update entities in the physics world.
 - **Physics Interactions**: Apply forces, set velocities, and modify other physics-related attributes of entities.
 - **Event Handling**: React to various events and server messages.
+- **World Deployment**: Deploy physics world to cloud
 - **Auto-scaling**: Automatically scale resources for a given world in a specific region.
 
 
