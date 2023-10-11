@@ -94,28 +94,35 @@ await client.connect('my-world');
 
 ### Interacting with Entities
 
-Creating an entity:
+**Creating an entity**
 
 ```javascript
 client.create(initialState);
 ```
 
-Updating an entity:
+**Updating an entity**
 
 ```javascript
 client.update(entityId, newState);
 ```
 
-Applying force:
+**Applying force**
 
 ```javascript
 client.applyForce(entityId, forceObject);
 ```
 
-Setting velocity:
+**Setting velocity**
 
 ```javascript
 client.setVelocity(entityId, velocityObject);
+```
+
+**Setting a state**
+You can also directly create, update, or destroy states by calling `client.set(state)`
+
+```javascript
+client.set(state);
 ```
 
 ### Listening to Events
@@ -141,19 +148,6 @@ Games will autoscale based on `maxPlayers` settings and active connected players
 ```javascript
 client.disconnect();
 ```
-
-### Sending JSON to Server
-
-The Yantra API is designed to accept and distribute state changes as JSON arrays. If you wish to use a more low-level API for managing state you may call `client.sendJSON`.
-
-```javascript
-client.sendJSON({ 
-  event: 'creator_json',
-  ayyoKey: 'YOUR_API_KEY',
-  json: { state: [YOUR_STATE_ARRAY] } 
-});
-```
-
 
 # Building your Game on Yantra
 
