@@ -42,7 +42,7 @@ program
   .command('whoami', 'Display the current user')
   .command('login', 'Login to Yantra using OTP or create an account if it does not exist')
   .command('logout', 'Logs CLI client out of Yantra')
-  // TODO: add 'recover' command to send all account names by email
+  .command('recover', 'Recover your account names by email address')
 
   if (process.argv.length <= 2 || program.args.includes('--help') || program.args.includes('-h')) {
     console.log(yantraAsciiArt);
