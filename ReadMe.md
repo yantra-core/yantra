@@ -2,8 +2,8 @@
 
 The `@yantra-core/sdk` is a client-side SDK for interfacing with the Yantra serverless physics platform. With this SDK, you can create, manage, and interact with dynamic physics environments. Below is a guide on how to use it.
 
-<img src="https://yantra.gg/img/yantra-logo.png"/>
-Visit: https://yantra.gg for a free account
+<img src="https://yantra.gg/img/yantra-logo-med.png"/>
+Install SDK and run `yantra login` for a free account
 
 ## Installation
 
