@@ -1,20 +1,13 @@
 // Create the walls of the room, the left and right wall will be goals
-// Remark: You could try instead using `border: "rect"` config option in your World config
-
+// Remark: You can also use try using `border: "rect"` config option in your World config
 function createWalls(Y) {
-  // "topLeft" and "bottomRight" are helpers defined for us based on map size
-  // TOOD: needs room config from Y scope
-  console.log(Y.worldConfig.room)
-
-
-
-
     
   Y.worldConfig.room.center = {
     x: 0,
     y: 0
   };
 
+  // "topLeft" and "bottomRight" are helpers defined for us based on map size
   Y.worldConfig.room.topLeft = {
     x: Y.worldConfig.room.center.x - (Y.worldConfig.room.width),
     y: Y.worldConfig.room.center.y - (Y.worldConfig.room.height)
@@ -25,17 +18,10 @@ function createWalls(Y) {
     y: Y.worldConfig.room.center.y + (Y.worldConfig.room.height)
   };
 
-  console.log(Y.worldConfig.room)
-
-
+  // console.log(Y.worldConfig.room)
 
   const topLeft = Y.worldConfig.room.topLeft;
   const bottomRight = Y.worldConfig.room.bottomRight;
-
-
-
-
-
 
   const WALL_THICKNESS = 200;
 
@@ -87,6 +73,7 @@ function createWalls(Y) {
       fillColor: fillColor             // fillColor is optional, defaults to 0x000000
     });
   }
+
 };
 
 export default createWalls;

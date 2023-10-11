@@ -54,7 +54,7 @@ function YantraClient(options) {
   options.worker = false;
 
   if (options.onServerMessage) {
-   this._onServerMessage = options.onServerMessage;
+    this._onServerMessage = options.onServerMessage;
   }
 
   if (options.owner) {
@@ -230,7 +230,7 @@ YantraClient.prototype.connect = async function (worldId) {
 
     // Check for the YANTRA_ENV value
     const yantraEnv = argv.env || 'prod'; // Default to 'prod' if not provided
-  
+
     if (yantraEnv === 'cloud') {
       console.log('YantraClient Cloud Mode Detected. Connecting to local websocket server.');
       worldId = {
@@ -251,7 +251,7 @@ YantraClient.prototype.connect = async function (worldId) {
     console.log('Using best available server:', this.worldConfig.processInfo);
     if (this.worldConfig.processInfo.room) {
       this.worldConfig.room = this.worldConfig.processInfo.room; // legacy API
-    } 
+    }
 
     wsConnectionString = world[0].processInfo.wsConnectionString;
   }
@@ -272,40 +272,40 @@ YantraClient.prototype.connect = async function (worldId) {
     } else {
       this.serverConnection = new ws(wsConnectionString);
     }
-  
-  
+
+
     this.serverConnection.onopen = (event) => {
       this._onOpen.bind(this, wsConnectionString)(event);
       resolve(this); // Resolve the promise once the connection is opened
     };
-    
+
     this.serverConnection.onerror = (event) => {
       this._onError.bind(this, wsConnectionString)(event);
       reject(new Error('WebSocket connection error')); // Reject the promise on error
     };
-    
+
     this.serverConnection.onclose = this._onClose.bind(this, wsConnectionString);
-  
+
     this.serverConnection.onmessage = function (msg) {
-  
+
       if (this.useWorker) {
         this.worker.postMessage(msg.data);
       } else {
         let json = JSON.parse(msg.data);
         let snapshot = this.onServerMessage(json);
         // console.log(snapshot)
-  
+
         if (this._onServerMessage) {
           this._onServerMessage(snapshot);
         }
       }
-  
+
     }.bind(this);
-  
+
     this.serverConnection.addEventListener('error', (error) => {
       console.error('WebSocket error:', error);
     });
-  
+
   });
 };
 
@@ -370,7 +370,7 @@ YantraClient.prototype.sendState = function (json) {
 YantraClient.prototype._onOpen = function (wsConnectionString) {
   this.connectAttempts = 0;
   this.connected = true;
-  console.log('WebSocket connection opened ' + wsConnectionString);
+  console.log('WebSocket connection opened! ' + wsConnectionString);
   // serverSettings.paused = false;
   this.emit('open');
   this.emit('connect', this);
@@ -444,6 +444,18 @@ YantraClient.prototype.emit = function (event, data) {
       fn.call(self, data);
     });
   }
+}
+
+YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode) {
+  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
+  console.log('\n');
+  console.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  console.log('¢∞§                                              §∞¢');
+  console.log('    ', gameLink);
+  console.log('      This link will open the game in browser')
+  console.log('¢∞§                                              §∞¢');
+  console.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  console.log('\n\n');
 }
 
 export default YantraClient;

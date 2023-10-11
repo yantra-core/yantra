@@ -13,6 +13,8 @@ async function go () {
     console.log(err);
   }
 
+  Y.welcomeLink(Y.owner, config.mode);
+
   // TODO: can we remove this? can sdk bind this scope instead? is scope already bound?
   Y.worldConfig = {
     room: config

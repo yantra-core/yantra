@@ -1,6 +1,6 @@
 let config = {
-  "id": "PONG",
-  "mode": "PONG",
+  "id": "pong",
+  "mode": "pong",
   "width": 2560,
   "height": 1440,
   "gravity": {

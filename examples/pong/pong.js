@@ -34,13 +34,12 @@ let assignedTeam = 'blue';
 // The init() function is called once when the game is created
 pong.init = async function pongInit(Y) {
 
-  // set player config
   Y.config({
-    player: {
-      width: 500,
-      height: 500,
-      texture: 'pixel'
-    }
+    "player": {
+      "width": 40,
+      "height": 480,
+      "texture": "pixel"
+    },
   });
 
   createBall(Y);
@@ -58,6 +57,7 @@ pong.collision = function (collision) {
 // The tick() function is called each game tick
 // This is the main game loop, where you can send new response state based on request state
 pong.tick = function (gamestate) {
+
   // console.log('running pong.tick', gamestate);
   let Y = this;
   // reset goal tracking each tick
@@ -73,19 +73,13 @@ pong.tick = function (gamestate) {
   // We can mutate server state by sending state via `res.send()`
   //
   gamestate.state.forEach(function (state) { // for each existing state in the req
-    // console.log('ssss', state)
-    // You could listen for the `PLAYER_PLAYER_JOIN` events to assign teams
-    // Instead we just check if the player has been assigned a fillColor ( rename to color )
-    // if (state.type === 'PLAYER_PLAYER_JOIN') {}
-    if (state.type === 'BODY') {
-      // console.log('ssss', state)
-    }
-    // TODO: move event collides to a separate function, have them return true or false
-    if (state.type === 'PLAYER') {
-      // console.log('pong state', state)
-      if (!state.fillColor) {
-        // console.log('ASSINGING TINT')
 
+    // You could listen for the `PLAYER_PLAYER_JOIN` events to assign teams
+    // if (state.type === 'PLAYER_PLAYER_JOIN') {}
+
+    // Instead we just check if the player has been assigned a fillColor ( rename to color )
+    if (state.type === 'PLAYER') {
+      if (!state.fillColor) {
         if (assignedTeam === 'blue') {
           state.fillColor = 0x0000ff;
           assignedTeam = 'red';
@@ -123,8 +117,15 @@ pong.tick = function (gamestate) {
         // track the ball that scored the goal
         pong.scoringBall = bodyA;
         pong.scoringGoal = bodyB;
+
         // track which team scored the goal ( owner of the wall that was hit )
-        pong.scoringTeam = bodyB.owner;
+        if (bodyB.owner === 'blue') {
+          pong.scoringTeam = 'red';
+        } else{
+          pong.scoringTeam = 'blue';
+        }
+        console.log('goal scored', pong.scoringTeam);
+
       } else {
         if (
           (bodyA.type === 'BODY' && bodyA.kind === 'ball')) {
