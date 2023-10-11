@@ -2,9 +2,7 @@ import yantra from '@yantra-core/sdk';
 import world from './world.js';
 import config from './config.js';
 
-let client = yantra.createClient({
-  owner: 'AYYO-ALPHA-0'
-});
+let client = yantra.createClient({});
 
 async function go () {
 

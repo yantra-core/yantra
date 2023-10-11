@@ -2,15 +2,13 @@ import yantra from '@yantra-core/sdk';
 import pong from './pong.js';
 import config from './config.js';
 
-let Y = yantra.createClient({
-  owner: 'AYYO-ALPHA-0'
-});
+let Y = yantra.createClient({});
 
 async function go () {
 
-  // creates world if it doesnt already exist
+  // create or update world with config
   try {
-    await Y.createWorld('pong', config);
+    await Y.setWorld('pong', config);
   } catch (err) {
     console.log(err);
   }
@@ -30,7 +28,7 @@ async function go () {
   //Y.on('collision', pong.collision);
   Y.on('gamestate', pong.tick);
 
-  await Y.connect();
+  await Y.connect('pong');
   
 };
 

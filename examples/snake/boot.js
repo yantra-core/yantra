@@ -2,9 +2,7 @@ import config from './config.js';
 import yantra from '@yantra-core/sdk';
 import snake from './snake.js';
 
-let Y = yantra.createClient({
-  owner: 'AYYO-ALPHA-0'
-});
+let Y = yantra.createClient({});
 
 async function go () {
 
