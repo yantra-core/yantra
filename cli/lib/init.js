@@ -50,7 +50,7 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
 
 init.scaffold = async function scaffoldInit() {
 
-  const sourceDir = path.resolve(process.cwd(), 'node_modules/@yantra-core/examples/world');
+  const sourceDir = path.resolve(__dirname, '../node_modules/@yantra-core/examples/world');
 
   const defaultWorldName = path.basename(process.cwd());
 
@@ -73,8 +73,7 @@ init.clone = async function cloneInit(worldname) {
     return;
   }
 
-  const sourceDir = path.resolve(process.cwd(), 'node_modules/@yantra-core/examples', worldname);
-
+  const sourceDir = path.resolve(__dirname, '../node_modules/@yantra-core/examples', worldname);
   await init.configureWorld(sourceDir, worldname);
 }
 
