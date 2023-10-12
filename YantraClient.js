@@ -71,6 +71,12 @@ function YantraClient(options) {
     this.etherspaceEndpoint = options.etherspaceEndpoint;
   }
 
+  if (options.logger) {
+    this.log = options.logger;
+  } else {
+    this.log = console.log;
+  }
+
   if (options.accessToken) {
     this.accessToken = options.accessToken;
   }
@@ -199,7 +205,7 @@ YantraClient.prototype.updateWorld = updateWorld;
  * // Connect using a worldId string
  * client.connect('worldIdString')
  *   .then(client => {
- *     console.log('Connected to the world:', client);
+ *     this.log('Connected to the world:', client);
  *   })
  *   .catch(error => {
  *     console.error('Connection error:', error);
@@ -208,7 +214,7 @@ YantraClient.prototype.updateWorld = updateWorld;
  * // Connect using an object with wsConnectionString property
  * client.connect({ wsConnectionString: 'wss://example.com' })
  *   .then(client => {
- *     console.log('Connected to the world:', client);
+ *     this.log('Connected to the world:', client);
  *   })
  *   .catch(error => {
  *     console.error('Connection error:', error);
@@ -232,7 +238,7 @@ YantraClient.prototype.connect = async function (worldId) {
     const yantraEnv = argv.env || 'prod'; // Default to 'prod' if not provided
 
     if (yantraEnv === 'cloud') {
-      console.log('YantraClient Cloud Mode Detected. Connecting to local websocket server.');
+      this.log('YantraClient Cloud Mode Detected. Connecting to local websocket server.');
       worldId = {
         wsConnectionString: 'ws://127.0.0.1'
       };
@@ -244,11 +250,11 @@ YantraClient.prototype.connect = async function (worldId) {
   } else {
     // Call into autoscaler to discover the websocket connection string
     // This will either return an existing connection string, or create a new one
-    console.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
+    this.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
     let world = await this.autoscale(this.region, this.owner, worldId)
     this.worldConfig = world[0];
-    console.log(world.length, 'server candidate(s) found');
-    console.log('Using best available server:', this.worldConfig.processInfo);
+    this.log(world.length, 'server candidate(s) found');
+    this.log('Using best available server:', this.worldConfig.processInfo);
     if (this.worldConfig.processInfo.room) {
       this.worldConfig.room = this.worldConfig.processInfo.room; // legacy API
     }
@@ -262,7 +268,7 @@ YantraClient.prototype.connect = async function (worldId) {
   }
 
   let apiToken = null;
-  console.log('connecting... ' + wsConnectionString);
+  this.log('connecting... ' + wsConnectionString);
 
 
   return new Promise((resolve, reject) => {
@@ -293,7 +299,7 @@ YantraClient.prototype.connect = async function (worldId) {
       } else {
         let json = JSON.parse(msg.data);
         let snapshot = this.onServerMessage(json);
-        // console.log(snapshot)
+        // this.log(snapshot)
 
         if (this._onServerMessage) {
           this._onServerMessage(snapshot);
@@ -322,7 +328,7 @@ YantraClient.prototype.connect = async function (worldId) {
  */
 YantraClient.prototype.disconnect = function () {
   if (this.serverConnection) {
-    console.log('disconnecting...');
+    this.log('disconnecting...');
     this.serverConnection.close();
     this.connected = false;
   }
@@ -370,19 +376,19 @@ YantraClient.prototype.sendState = function (json) {
 YantraClient.prototype._onOpen = function (wsConnectionString) {
   this.connectAttempts = 0;
   this.connected = true;
-  console.log('WebSocket connection opened! ' + wsConnectionString);
+  this.log('WebSocket connection opened! ' + wsConnectionString);
   // serverSettings.paused = false;
   this.emit('open');
   this.emit('connect', this);
 };
 
 YantraClient.prototype._onError = function (wsConnectionString) {
-  console.log('WebSocket connection error' + wsConnectionString);
+  this.log('WebSocket connection error' + wsConnectionString);
   this.emit('error');
 };
 
 YantraClient.prototype._onClose = function (wsConnectionString, event) {
-  console.log('WebSocket connection closed ' + wsConnectionString);
+  this.log('WebSocket connection closed ' + wsConnectionString);
   // snapshot.clear();
   // serverSettings.paused = true;
   this.connected = false;
@@ -391,12 +397,12 @@ YantraClient.prototype._onClose = function (wsConnectionString, event) {
 
   if (false && !wasClean) {
     let msg = `Connection closed with unclean disconnect, code=${code} reason=${reason}`;
-    console.log(msg);
+    this.log(msg);
     console.error(msg);
     setTimeout(() => {
       let msg = this.connectAttempts + ` attempting to reconnect...`;
-      console.log(msg);
-      console.log(msg);
+      this.log(msg);
+      this.log(msg);
       this.connect(wsConnectionString);
     }, 3333);
   }
@@ -417,7 +423,7 @@ YantraClient.prototype.events = {};
  * @example
  * // Register an event listener for the 'update' event.
  * client.on('update', function(data) {
- *   console.log('Update event received:', data);
+ *   this.log('Update event received:', data);
  * });
  */
 YantraClient.prototype.on = function (event, fn) {
@@ -448,14 +454,14 @@ YantraClient.prototype.emit = function (event, data) {
 
 YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode) {
   let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
-  console.log('\n');
-  console.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
-  console.log('¢∞§                                              §∞¢');
-  console.log('    ', gameLink);
-  console.log('      This link will open the game in browser')
-  console.log('¢∞§                                              §∞¢');
-  console.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
-  console.log('\n\n');
+  this.log('\n');
+  this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  this.log('¢∞§                                              §∞¢');
+  this.log('    ', gameLink);
+  this.log('      This link will open the game in browser')
+  this.log('¢∞§                                              §∞¢');
+  this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  this.log('\n\n');
 }
 
 export default YantraClient;
