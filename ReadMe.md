@@ -1,24 +1,20 @@
 # `@yantra-core/sdk`
 
-The `@yantra-core/sdk` is an SDK for interfacing with the Yantra serverless physics platform. With this SDK, you can create, manage, and interact with dynamic physics environments in the cloud. Below is a guide on how to use it.
+`@yantra-core/sdk` is an SDK for interfacing with the Yantra serverless physics platform. With this SDK, you can create, manage, and interact with dynamic physics environments in the cloud. Below is a guide on how to use it.
 
 <img src="https://yantra.gg/img/yantra-logo-med.png"/>
-Install SDK and run `yantra login` for a free account
+Install CLI and run `yantra login` for a free account
 
 ## Installation
 
-Install the SDK CLI (Command Line Tool) via npm:
+**Install the SDK CLI (Command Line Tool) with `npm`:**
 
 ```bash
-npm install @yantra-core/cli
-yantra
+npm install -g @yantra-core/cli
 ```
 
-Install the SDK Client via npm:
+Now you can run the `yantra` command on your system.
 
-```bash
-npm install @yantra-core/client
-```
 
 ## Features
 
@@ -67,24 +63,33 @@ cd snake
 yantra deploy
 ```
 
+
+
 ## Client SDK Usage
+
+## Install the SDK Client with `npm`
+
+```bash
+npm install @yantra-core/client
+```
+
 
 ### Importing the Node SDK Client
 
 ```javascript
-import client from '@yantra-core/client';
+import yantra from '@yantra-core/client';
 ```
 
 ### Importing the Browser SDK
 
 ```javascript
-import sdk from '@yantra-core/client/client-browser.js';
+import yantra from '@yantra-core/client/client-browser.js';
 ```
 
 ### Creating a Yantra Client
 *Basic Client Usage*
 ```javascript
-const client = sdk.createClient({
+const Y = yantra.createClient({
   owner: 'your_name',
   region: 'Washington_DC' // see https://yantra.gg/docs#regions
 });
@@ -166,13 +171,13 @@ client.disconnect();
 - **Save**: Click "Save" to store your code in our database.
 
 ### Local Development:
-- Import the `@yantra-core/sdk` in your code.
+- Import the `@yantra-core/client` in your code.
 - Your game logic subscribes to the game state. Modify the state in response to each tick for dynamic gameplay.
 
 ## Important:
 
 - **No External Dependencies**: Your code should run without requiring any external libraries or packages.
-- **SDK Connection**: When on our servers, `@yantra-core/sdk` auto-connects to the right localhost and port.
+- **SDK Connection**: When on our servers, `@yantra-core/client` auto-connects to the right localhost and port.
 
 
 ## Running in Yantra's Environment:
