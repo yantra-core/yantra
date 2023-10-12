@@ -2,7 +2,7 @@
 import { existsSync, unlinkSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import configManager from '../core/lib/configManager.js';
+import configManager from '@yantra-core/client/lib/configManager.js';
 
 function logout() {
   configManager.unlinkConfig();

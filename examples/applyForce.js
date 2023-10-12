@@ -1,4 +1,4 @@
-import yantra from '@yantra-core/sdk';
+import yantra from '@yantra-core/client';
 
 let client = yantra.createClient({});
 
