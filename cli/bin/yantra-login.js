@@ -1,27 +1,14 @@
 #!/usr/bin/env node
-import config from '../../config/config.js';
+import config from '@yantra-core/client/config/config.js';
 import { existsSync, writeFileSync } from 'fs';
 import inquirer from 'inquirer';
 import axios from 'axios';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import configManager from '@yantra-core/client/lib/configManager.js';
-
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 let etherspaceEndpoint = config.etherspaceEndpoint;
 
 async function go() {
   // Check for existence of token
-  const tokenPath = path.resolve(__dirname + '/../config/token.json');
-
-  /* Remark: Better just to start new login instead of throwing error
-  if (existsSync(tokenPath)) {
-    console.log('You are already logged in.');
-    return;
-  } */
 
   console.log('Welcome to Yantra. Login with your account name.');
   console.log('If this is a new account, please enter your desired account name.');

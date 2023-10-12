@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import config from '../config/config.js';
+import config from '@yantra-core/client/config/config.js';
 import { existsSync, writeFileSync } from 'fs';
 import inquirer from 'inquirer';
 import axios from 'axios';
