@@ -2,9 +2,8 @@ import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
 import archiver from 'archiver';
-import config from '../../config/config.js';
+import config from '../../../config/config.js';
 import FormData from 'form-data';
-import inquirer from 'inquirer';
 import ProgressBar from 'cli-progress';
 import zipWorld from './zipWorld.js';
 

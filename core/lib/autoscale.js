@@ -1,5 +1,5 @@
+import config from '../../config/config.js';
 
-import config from '../config/config.js';
 import axios from 'axios';
 
 async function autoscale (region, owner, worldId) {

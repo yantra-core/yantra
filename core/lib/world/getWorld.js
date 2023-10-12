@@ -1,4 +1,4 @@
-import config from '../../config/config.js';
+import config from '../../../config/config.js';
 import axios from 'axios';
 
 let getWorld = async function getWorld (owner, worldId, worldConfig) {

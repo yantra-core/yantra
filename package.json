@@ -2,6 +2,17 @@
   "name": "@yantra-core/sdk",
   "version": "0.1.4",
   "description": "Yantra.gg Serverless Physics SDK for Node",
+  "workspaces": [
+    "client",
+    "cli",
+    "core"
+  ],
+  "scripts": {
+    "install:client": "npm install --workspace client",
+    "install:cli": "npm install --workspace cli",
+    "install:core": "npm install --workspace core",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "main": "sdk.js",
   "exports": {
     ".": {
@@ -20,23 +31,7 @@
     "yantra-deploy": "./bin/yantra-deploy.js",
     "yantra-whoami": "./bin/yantra-whoami.js"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "type": "module",
   "author": "",
-  "license": "Copyright Yantra Core 2023",
-  "dependencies": {
-    "@ljharb/through": "^2.3.9",
-    "archiver": "^6.0.1",
-    "avsc": "^5.7.7",
-    "axios": "^1.5.1",
-    "blessed": "^0.1.81",
-    "cli-progress": "^3.12.0",
-    "commander": "^11.0.0",
-    "form-data": "^4.0.0",
-    "inquirer": "^9.2.11",
-    "minimist": "^1.2.8",
-    "ws": "^8.14.2"
-  }
+  "license": "Copyright Yantra Works 2023"
 }

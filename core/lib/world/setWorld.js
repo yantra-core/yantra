@@ -2,7 +2,7 @@
 // setWorld is a convenience function that will create a world with config if it doesn't exist,
 // or update a world config if it does exist
 // setWorld is the *recommended* way to create or update worlds
-import config from '../../config/config.js';
+import config from '../../../config/config.js';
 import deepEquals from '../helpers/deepEquals.js';
 import axios from 'axios';
 

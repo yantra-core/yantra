@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import configManager from '../lib/configManager.js';
+import configManager from '../core/lib/configManager.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

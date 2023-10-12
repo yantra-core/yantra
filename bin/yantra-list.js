@@ -20,7 +20,7 @@ async function go() {
 
   const worlds = await client.list(client.owner);
   if (worlds.length === 0) {
-    console.log(owner, 'has not created any worlds yet...');
+    console.log(client.owner, 'has not created any worlds yet...');
     console.log('Run `yantra init` to create a new world.');
     console.log('Run `yantra clone` to copy an existing Yantra world.');
 

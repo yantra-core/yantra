@@ -1,4 +1,4 @@
-import config from '../../config/config.js';
+import config from '../../../config/config.js';
 import axios from 'axios';
 
 let removeWorld = async function removeWorld (owner, worldId) {

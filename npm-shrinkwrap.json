@@ -1,25 +1,18 @@
 {
   "name": "@yantra-core/sdk",
-  "version": "0.0.8",
+  "version": "0.1.4",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@yantra-core/sdk",
-      "version": "0.0.8",
-      "license": "Copyright Yantra Core 2023",
-      "dependencies": {
-        "@ljharb/through": "^2.3.9",
-        "archiver": "^6.0.1",
-        "avsc": "^5.7.7",
-        "axios": "^1.5.1",
-        "cli-progress": "^3.12.0",
-        "commander": "^11.0.0",
-        "form-data": "^4.0.0",
-        "inquirer": "^9.2.11",
-        "minimist": "^1.2.8",
-        "ws": "^8.14.2"
-      },
+      "version": "0.1.4",
+      "license": "Copyright Yantra Works 2023",
+      "workspaces": [
+        "client",
+        "cli",
+        "core"
+      ],
       "bin": {
         "yantra": "bin/yantra.js",
         "yantra-deploy": "bin/yantra-deploy.js",
@@ -30,6 +23,60 @@
         "yantra-whoami": "bin/yantra-whoami.js"
       }
     },
+    "cli": {
+      "name": "@yantra-core/cli",
+      "version": "0.1.0",
+      "dependencies": {
+        "@ljharb/through": "^2.3.9",
+        "@yantra-core/core": "*",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "commander": "^11.0.0",
+        "form-data": "^4.0.0",
+        "inquirer": "^9.2.11",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      },
+      "bin": {
+        "yantra": "bin/yantra.js",
+        "yantra-init": "bin/yantra-init.js",
+        "yantra-list": "bin/yantra-list.js"
+      }
+    },
+    "client": {
+      "name": "@yantra-core/client",
+      "version": "0.1.0",
+      "dependencies": {
+        "@ljharb/through": "^2.3.9",
+        "@yantra-core/core": "*",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "form-data": "^4.0.0",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      }
+    },
+    "core": {
+      "name": "@yantra-core/core",
+      "version": "0.1.0",
+      "dependencies": {
+        "@ljharb/through": "^2.3.9",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "form-data": "^4.0.0",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      }
+    },
     "node_modules/@ljharb/through": {
       "version": "2.3.9",
       "resolved": "https://registry.npmjs.org/@ljharb/through/-/through-2.3.9.tgz",
@@ -37,6 +84,18 @@
       "engines": {
         "node": ">= 0.4"
       }
+    },
+    "node_modules/@yantra-core/cli": {
+      "resolved": "cli",
+      "link": true
+    },
+    "node_modules/@yantra-core/client": {
+      "resolved": "client",
+      "link": true
+    },
+    "node_modules/@yantra-core/core": {
+      "resolved": "core",
+      "link": true
     },
     "node_modules/ansi-escapes": {
       "version": "4.3.2",
@@ -172,6 +231,17 @@
         "buffer": "^5.5.0",
         "inherits": "^2.0.4",
         "readable-stream": "^3.4.0"
+      }
+    },
+    "node_modules/blessed": {
+      "version": "0.1.81",
+      "resolved": "https://registry.npmjs.org/blessed/-/blessed-0.1.81.tgz",
+      "integrity": "sha512-LoF5gae+hlmfORcG1M5+5XZi4LBmvlXTzwJWzUlPryN/SJdSflZvROM2TwkT0GMpq7oqT48NRd4GS7BiVBc5OQ==",
+      "bin": {
+        "blessed": "bin/tput.js"
+      },
+      "engines": {
+        "node": ">= 0.8.0"
       }
     },
     "node_modules/brace-expansion": {
@@ -1069,6 +1139,52 @@
       "resolved": "https://registry.npmjs.org/@ljharb/through/-/through-2.3.9.tgz",
       "integrity": "sha512-yN599ZBuMPPK4tdoToLlvgJB4CLK8fGl7ntfy0Wn7U6ttNvHYurd81bfUiK/6sMkiIwm65R6ck4L6+Y3DfVbNQ=="
     },
+    "@yantra-core/cli": {
+      "version": "file:cli",
+      "requires": {
+        "@ljharb/through": "^2.3.9",
+        "@yantra-core/core": "*",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "commander": "^11.0.0",
+        "form-data": "^4.0.0",
+        "inquirer": "^9.2.11",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      }
+    },
+    "@yantra-core/client": {
+      "version": "file:client",
+      "requires": {
+        "@ljharb/through": "^2.3.9",
+        "@yantra-core/core": "*",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "form-data": "^4.0.0",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      }
+    },
+    "@yantra-core/core": {
+      "version": "file:core",
+      "requires": {
+        "@ljharb/through": "^2.3.9",
+        "archiver": "^6.0.1",
+        "avsc": "^5.7.7",
+        "axios": "^1.5.1",
+        "blessed": "^0.1.81",
+        "cli-progress": "^3.12.0",
+        "form-data": "^4.0.0",
+        "minimist": "^1.2.8",
+        "ws": "^8.14.2"
+      }
+    },
     "ansi-escapes": {
       "version": "4.3.2",
       "resolved": "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-4.3.2.tgz",
@@ -1166,6 +1282,11 @@
         "inherits": "^2.0.4",
         "readable-stream": "^3.4.0"
       }
+    },
+    "blessed": {
+      "version": "0.1.81",
+      "resolved": "https://registry.npmjs.org/blessed/-/blessed-0.1.81.tgz",
+      "integrity": "sha512-LoF5gae+hlmfORcG1M5+5XZi4LBmvlXTzwJWzUlPryN/SJdSflZvROM2TwkT0GMpq7oqT48NRd4GS7BiVBc5OQ=="
     },
     "brace-expansion": {
       "version": "2.0.1",

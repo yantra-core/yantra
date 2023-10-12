@@ -1,8 +1,6 @@
 import yantra from '@yantra-core/sdk';
 
-let client = yantra.createClient({
-  owner: 'Marak'
-});
+let client = yantra.createClient({});
 
 async function go() {
 

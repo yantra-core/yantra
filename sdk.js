@@ -1,7 +1,7 @@
 import YantraClient from './YantraClient.js';
-import deployWorld from './lib/world/deployWorld.js';
-import zipWorld from './lib/world/zipWorld.js';
-import configManager from './lib/configManager.js';
+import deployWorld from './core/lib/world/deployWorld.js';
+import zipWorld from './core/lib/world/zipWorld.js';
+import configManager from './core/lib/configManager.js';
 
 import { existsSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';

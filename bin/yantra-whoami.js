@@ -2,7 +2,7 @@
 import { existsSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import configManager from '../lib/configManager.js';
+import configManager from '../core/lib/configManager.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
