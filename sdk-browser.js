@@ -1,4 +1,4 @@
-import YantraClient from './YantraClient.js';
+import YantraClient from './client/YantraClient.js';
 
 const sdk = {};
 

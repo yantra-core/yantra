@@ -1,17 +1,17 @@
-import onServerMessage from './lib/core/onServerMessage.js';
-import createWorld from './lib/world/createWorld.js';
-import removeWorld from './lib/world/removeWorld.js';
-import create from './lib/state/create.js';
-import set from './lib/state/set.js';
-import autoscale from './lib/autoscale.js';
-import applyForce from './lib/state/applyForce.js';
-import setVelocity from './lib/state/setVelocity.js';
-import update from './lib/state/update.js';
-import setConfig from './lib/state/setConfig.js';
-import listWorlds from './lib/world/listWorlds.js';
-import setWorld from './lib/world/setWorld.js';
-import getWorld from './lib/world/getWorld.js';
-import updateWorld from './lib/world/updateWorld.js';
+import onServerMessage from '../core/lib/core/onServerMessage.js';
+import createWorld from '../core/lib/world/createWorld.js';
+import removeWorld from '../core/lib/world/removeWorld.js';
+import create from '../core/lib/state/create.js';
+import set from '../core/lib/state/set.js';
+import autoscale from '../core/lib/autoscale.js';
+import applyForce from '../core/lib/state/applyForce.js';
+import setVelocity from '../core/lib/state/setVelocity.js';
+import update from '../core/lib/state/update.js';
+import setConfig from '../core/lib/state/setConfig.js';
+import listWorlds from '../core/lib/world/listWorlds.js';
+import setWorld from '../core/lib/world/setWorld.js';
+import getWorld from '../core/lib/world/getWorld.js';
+import updateWorld from '../core/lib/world/updateWorld.js';
 import minimist from 'minimist';
 
 import ws from 'ws';
@@ -270,7 +270,6 @@ YantraClient.prototype.connect = async function (worldId) {
 
   let apiToken = null;
   this.log('connecting... ' + wsConnectionString);
-
 
   return new Promise((resolve, reject) => {
 
