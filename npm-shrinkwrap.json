@@ -10,8 +10,7 @@
       "license": "Copyright Yantra Works 2023",
       "workspaces": [
         "client",
-        "cli",
-        "core"
+        "cli"
       ],
       "bin": {
         "yantra": "bin/yantra.js",
@@ -27,18 +26,14 @@
       "name": "@yantra-core/cli",
       "version": "0.1.0",
       "dependencies": {
-        "@ljharb/through": "^2.3.9",
-        "@yantra-core/core": "*",
+        "@yantra-core/client": "*",
         "archiver": "^6.0.1",
-        "avsc": "^5.7.7",
-        "axios": "^1.5.1",
         "blessed": "^0.1.81",
         "cli-progress": "^3.12.0",
         "commander": "^11.0.0",
         "form-data": "^4.0.0",
         "inquirer": "^9.2.11",
-        "minimist": "^1.2.8",
-        "ws": "^8.14.2"
+        "minimist": "^1.2.8"
       },
       "bin": {
         "yantra": "bin/yantra.js",
@@ -50,14 +45,8 @@
       "name": "@yantra-core/client",
       "version": "0.1.0",
       "dependencies": {
-        "@ljharb/through": "^2.3.9",
-        "@yantra-core/core": "*",
-        "archiver": "^6.0.1",
         "avsc": "^5.7.7",
         "axios": "^1.5.1",
-        "blessed": "^0.1.81",
-        "cli-progress": "^3.12.0",
-        "form-data": "^4.0.0",
         "minimist": "^1.2.8",
         "ws": "^8.14.2"
       }
@@ -65,15 +54,10 @@
     "core": {
       "name": "@yantra-core/core",
       "version": "0.1.0",
+      "extraneous": true,
       "dependencies": {
-        "@ljharb/through": "^2.3.9",
-        "archiver": "^6.0.1",
         "avsc": "^5.7.7",
         "axios": "^1.5.1",
-        "blessed": "^0.1.81",
-        "cli-progress": "^3.12.0",
-        "form-data": "^4.0.0",
-        "minimist": "^1.2.8",
         "ws": "^8.14.2"
       }
     },
@@ -91,10 +75,6 @@
     },
     "node_modules/@yantra-core/client": {
       "resolved": "client",
-      "link": true
-    },
-    "node_modules/@yantra-core/core": {
-      "resolved": "core",
       "link": true
     },
     "node_modules/ansi-escapes": {
@@ -1142,45 +1122,21 @@
     "@yantra-core/cli": {
       "version": "file:cli",
       "requires": {
-        "@ljharb/through": "^2.3.9",
-        "@yantra-core/core": "*",
+        "@yantra-core/client": "*",
         "archiver": "^6.0.1",
-        "avsc": "^5.7.7",
-        "axios": "^1.5.1",
         "blessed": "^0.1.81",
         "cli-progress": "^3.12.0",
         "commander": "^11.0.0",
         "form-data": "^4.0.0",
         "inquirer": "^9.2.11",
-        "minimist": "^1.2.8",
-        "ws": "^8.14.2"
+        "minimist": "^1.2.8"
       }
     },
     "@yantra-core/client": {
       "version": "file:client",
       "requires": {
-        "@ljharb/through": "^2.3.9",
-        "@yantra-core/core": "*",
-        "archiver": "^6.0.1",
         "avsc": "^5.7.7",
         "axios": "^1.5.1",
-        "blessed": "^0.1.81",
-        "cli-progress": "^3.12.0",
-        "form-data": "^4.0.0",
-        "minimist": "^1.2.8",
-        "ws": "^8.14.2"
-      }
-    },
-    "@yantra-core/core": {
-      "version": "file:core",
-      "requires": {
-        "@ljharb/through": "^2.3.9",
-        "archiver": "^6.0.1",
-        "avsc": "^5.7.7",
-        "axios": "^1.5.1",
-        "blessed": "^0.1.81",
-        "cli-progress": "^3.12.0",
-        "form-data": "^4.0.0",
         "minimist": "^1.2.8",
         "ws": "^8.14.2"
       }

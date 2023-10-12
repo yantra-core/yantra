@@ -1,6 +1,6 @@
 {
   "name": "@yantra-core/sdk",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "workspaces": [
     "client",
