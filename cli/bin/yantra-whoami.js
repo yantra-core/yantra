@@ -2,7 +2,8 @@
 import { existsSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import configManager from '../../client/lib/configManager.js';
+import configManager from '@yantra-core/client/lib/configManager.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

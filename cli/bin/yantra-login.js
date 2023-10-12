@@ -5,7 +5,8 @@ import inquirer from 'inquirer';
 import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import configManager from '../../client/lib/configManager.js';
+import configManager from '@yantra-core/client/lib/configManager.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
