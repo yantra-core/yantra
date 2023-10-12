@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import yantra from '../sdk.js';
+import yantra from '@yantra-core/client';
 import minimist from 'minimist';
 import fs from 'fs';
 import path from 'path';

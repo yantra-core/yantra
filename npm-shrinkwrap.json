@@ -1,12 +1,12 @@
 {
   "name": "@yantra-core/sdk",
-  "version": "0.1.4",
+  "version": "0.2.1",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@yantra-core/sdk",
-      "version": "0.1.4",
+      "version": "0.2.1",
       "license": "Copyright Yantra Works 2023",
       "workspaces": [
         "client",
@@ -24,7 +24,8 @@
     },
     "cli": {
       "name": "@yantra-core/cli",
-      "version": "0.1.0",
+      "version": "0.2.2",
+      "license": "Copyright Yantra Works 2023",
       "dependencies": {
         "@yantra-core/client": "*",
         "archiver": "^6.0.1",
@@ -37,13 +38,18 @@
       },
       "bin": {
         "yantra": "bin/yantra.js",
+        "yantra-deploy": "bin/yantra-deploy.js",
         "yantra-init": "bin/yantra-init.js",
-        "yantra-list": "bin/yantra-list.js"
+        "yantra-list": "bin/yantra-list.js",
+        "yantra-login": "bin/yantra-login.js",
+        "yantra-logout": "bin/yantra-logout.js",
+        "yantra-whoami": "bin/yantra-whoami.js"
       }
     },
     "client": {
       "name": "@yantra-core/client",
-      "version": "0.1.0",
+      "version": "0.2.2",
+      "license": "Copyright Yantra Works 2023",
       "dependencies": {
         "avsc": "^5.7.7",
         "axios": "^1.5.1",

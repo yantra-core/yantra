@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import yantra from '../sdk.js';
+import yantra from '@yantra-core/client';
 import { existsSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import yantra from '../sdk.js';
+import yantra from '@yantra-core/client';
 import inquirer from 'inquirer';
 import ProgressBar from 'cli-progress';
 import fs from 'fs';
