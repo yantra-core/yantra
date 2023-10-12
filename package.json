@@ -1,6 +1,6 @@
 {
   "name": "@yantra-core/sdk",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
