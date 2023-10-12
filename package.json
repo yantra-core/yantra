@@ -4,13 +4,11 @@
   "description": "Yantra.gg Serverless Physics SDK for Node",
   "workspaces": [
     "client",
-    "cli",
-    "core"
+    "cli"
   ],
   "scripts": {
     "install:client": "npm install --workspace client",
     "install:cli": "npm install --workspace cli",
-    "install:core": "npm install --workspace core",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "sdk.js",
