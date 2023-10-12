@@ -5,20 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "sdk.js",
+  "main": "client.js",
   "dependencies": {
     "avsc": "^5.7.7",
     "axios": "^1.5.1",
     "ws": "^8.14.2",
     "minimist": "^1.2.8"
-  },
-  "exports": {
-    ".": {
-      "import": "./client-browser.js",
-      "require": "./client.js",
-      "node": "./client.js"
-    },
-    "./*": "./*"
   },
   "type": "module",
   "author": "",
