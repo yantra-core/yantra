@@ -254,7 +254,7 @@ YantraClient.prototype.connect = async function (worldId) {
     let world = await this.autoscale(this.region, this.owner, worldId)
     this.worldConfig = world[0];
     this.log(world.length, 'server candidate(s) found');
-    this.log('Using best available server:', this.worldConfig.processInfo);
+    this.log('Using best available server:', JSON.stringify(this.worldConfig.processInfo, true, 2));
     if (this.worldConfig.processInfo.room) {
       this.worldConfig.room = this.worldConfig.processInfo.room; // legacy API
     }
