@@ -1,6 +1,6 @@
 {
   "name": "@yantra-core/cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CLI for Yantra.gg Serverless Physics SDK for Node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,6 +8,7 @@
   "main": "cli.js",
   "dependencies": {
     "@yantra-core/client": "*",
+    "@yantra-core/examples": "*",
     "archiver": "^6.0.1",
     "blessed": "^0.1.81",
     "cli-progress": "^3.12.0",
