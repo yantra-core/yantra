@@ -12,20 +12,11 @@ async function go () {
   } catch (err) {
     console.log(err);
   }
-
-  // TODO: can we remove this? can sdk bind this scope instead? is scope already bound?
-  Y.worldConfig = {
-    room: config
-  };
-  // client.world = worldConfig;
   
   Y.on('connect', snake.init);
+  Y.on('gamestate', snake.tick);
 
   await Y.connect('snake');
-
-  Y.config(config);
-
-  Y.on('gamestate', snake.tick);
   
 };
 

@@ -1,7 +1,3 @@
-//
-// Simple custom movement() function
-// Set `movement: "default" in your World config if you do not wish to write your own movement function
-//
 // Simple custom movement() function
 // Set `movement: "default" in your World config if you do not wish to write your own movement function
 function movement(player) {
