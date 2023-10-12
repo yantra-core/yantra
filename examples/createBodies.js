@@ -27,6 +27,14 @@ async function go() {
       size = 'large';
     }
 
+    Y.config({
+      player: {
+        height: 300,
+        width: 300,
+        texture: 'triangle'
+      }
+    });
+
     // create a new physics body by inserting a new state object into the world
     Y.create({
       // id: 'game-ball',    // id is optional, will auto-id if not provided

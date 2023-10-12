@@ -1,8 +1,6 @@
-import yantra from '@yantra-core/sdk';
+import yantra from '@yantra-core/client';
 
-let client = yantra.createClient({
-  owner: 'Marak'
-});
+let client = yantra.createClient({});
 
 async function go() {
   // on each game tick, call the tick()
@@ -19,7 +17,7 @@ let tick = function tick (snapshot) {
   // We can mutate server state by sending updates via `update(id, data)`
   snapshot.state.forEach(function (state) { 
     // for each existing state in the req
-    if (state.id === 'game-ball') {
+    if (state.type === 'game-ball') {
       // if the state is the ball, send a new state to the server
       // moves the ball to the right and down on each tick
       client.update('game-ball', {

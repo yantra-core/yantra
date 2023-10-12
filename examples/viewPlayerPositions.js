@@ -15,11 +15,6 @@ async function go() {
     });
   });
 
-  // detect collisions
-  client.on('collision', (collision) => {
-    console.log('collision', collision);
-  });
-
 }
 
 go();
