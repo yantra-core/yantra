@@ -93,6 +93,9 @@ async function go() {
   // await client.updateWorld(owner, worldName, localConfig);
 
   await client.deploy(owner, worldName, deployPath);
+
+  // TODO: should optionaly and by default ping etherspace autoscale endpoint to start server
+  // this is the 80% use case where a developer will deploy and want to see the world running
 }
 
 go();
