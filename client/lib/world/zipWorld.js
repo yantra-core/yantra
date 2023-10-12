@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
 import archiver from 'archiver';
-import config from '../../../config/config.js';
+import config from '../../config/config.js';
 import FormData from 'form-data';
 import ProgressBar from 'cli-progress';
 
