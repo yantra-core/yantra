@@ -7,10 +7,17 @@ Install SDK and run `yantra login` for a free account
 
 ## Installation
 
-Install the SDK via npm:
+Install the SDK CLI (Command Line Tool) via npm:
 
 ```bash
-npm install -g @yantra-core/sdk
+npm install @yantra-core/cli
+yantra
+```
+
+Install the SDK Client via npm:
+
+```bash
+npm install @yantra-core/client
 ```
 
 ## Features
@@ -60,18 +67,18 @@ cd snake
 yantra deploy
 ```
 
-## SDK Usage
+## Client SDK Usage
 
-### Importing the Node SDK
+### Importing the Node SDK Client
 
 ```javascript
-import sdk from '@yantra-core/sdk';
+import client from '@yantra-core/client';
 ```
 
 ### Importing the Browser SDK
 
 ```javascript
-import sdk from '@yantra-core/sdk/sdk-browser.js';
+import sdk from '@yantra-core/client/client-browser.js';
 ```
 
 ### Creating a Yantra Client
