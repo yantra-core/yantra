@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-import inspector from '../../client/lib/cli/inspector.js';
+import inspector from '../lib/inspector.js';
 inspector.start('pong');

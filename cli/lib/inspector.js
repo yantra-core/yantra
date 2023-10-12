@@ -1,7 +1,7 @@
 // Blessed CLI Gamestate Inspect WIP
 // Close to MVP operational, needs a bit more UX work on loading and selecting entities
 
-import yantra from '../../../sdk.js';
+import yantra from '@yantra-core/client';
 import blessed from 'blessed';
 
 const inspector = {};

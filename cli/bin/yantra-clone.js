@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import init from '../../client/lib/cli/init.js';
+import init from '../lib/init.js';
 
 async function go() {
 
