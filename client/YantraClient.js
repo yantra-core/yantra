@@ -241,10 +241,6 @@ YantraClient.prototype.connect = async function (worldId) {
   let self = this;
   let wsConnectionString;
 
-  if (typeof worldId === 'undefined') {
-    throw new Error('worldId is required for YantraClient.connect(worldId)');
-  }
-
   // TODO: remove this from YantraClient class, no minimist required
   // Remark: `process.env.YANTRA_ENV` is set in production to override connect to local websocket server 
   //          This is to ensure low-latency, as the custom world code is run on the same host as the game server
@@ -261,6 +257,10 @@ YantraClient.prototype.connect = async function (worldId) {
         wsConnectionString: 'ws://127.0.0.1'
       };
     }
+  }
+
+  if (typeof worldId === 'undefined') {
+    throw new Error('worldId is required for YantraClient.connect(worldId)');
   }
 
   if (typeof worldId === 'object') {
