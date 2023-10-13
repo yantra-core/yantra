@@ -7,6 +7,7 @@ import autoscale from './lib/autoscale.js';
 import applyForce from './lib/state/applyForce.js';
 import setVelocity from './lib/state/setVelocity.js';
 import update from './lib/state/update.js';
+import clearAll from './lib/state/clearAll.js';
 import setConfig from './lib/state/setConfig.js';
 import listWorlds from './lib/world/listWorlds.js';
 import setWorld from './lib/world/setWorld.js';
@@ -80,12 +81,13 @@ function YantraClient(options) {
   if (options.accessToken) {
     this.accessToken = options.accessToken;
   }
-
   if (options.worker) {
     this.useWorker = true;
     this.worker = new Worker('./worker.js');
     this.worker.onmessage = function (e) {
+      // run the default onServerMessage function on all messages
       let snapshot = self.onServerMessage(e.data);
+      // if the optional onServerMessage callback is defined, call it
       if (this._onServerMessage) {
         this._onServerMessage(snapshot);
       }
@@ -95,6 +97,21 @@ function YantraClient(options) {
   }
 
 }
+
+YantraClient.prototype.emitGamestateEvents = function emitGamestateEvents (snapshot) {
+  let self = this;
+  // iterates through entire incoming gamestate array and checks for EVENT_MESSAGE
+  snapshot.state.forEach(function iterateStates(state){
+    if (state.type = 'EVENT_MESSAGE' && state.kind === 'PLAYER_JOINED') {
+      // This is bound to YantraClient.on('PLAYER_JOINED')
+      self.emit('PLAYER_JOINED', {
+        id: state.nickname, // should be state.target
+        type: 'PLAYER'
+      });
+    }
+  });
+}
+
 YantraClient.prototype.onServerMessage = onServerMessage;
 
 /**
@@ -221,7 +238,7 @@ YantraClient.prototype.updateWorld = updateWorld;
  *   });
  */
 YantraClient.prototype.connect = async function (worldId) {
-
+  let self = this;
   let wsConnectionString;
 
   if (typeof worldId === 'undefined') {
@@ -293,14 +310,17 @@ YantraClient.prototype.connect = async function (worldId) {
     this.serverConnection.onclose = this._onClose.bind(this, wsConnectionString);
 
     this.serverConnection.onmessage = function (msg) {
-
       if (this.useWorker) {
         this.worker.postMessage(msg.data);
       } else {
         let json = JSON.parse(msg.data);
         let snapshot = this.onServerMessage(json);
         // this.log(snapshot)
-
+        // run the optional preProcessing function on all messages
+        // this is currently used to parse gamestate for events to emit
+        if (snapshot && true) { // Remark: This could be configurable for performance
+          self.emitGamestateEvents(snapshot);
+        }
         if (this._onServerMessage) {
           this._onServerMessage(snapshot);
         }
@@ -355,6 +375,8 @@ YantraClient.prototype.sendJSON = function (json) {
     } else {
       this.serverConnection.send(JSON.stringify(json));
     }
+  } else {
+    this.log('WARNING: not connected to world, cannot send JSON');
   }
   return this;
 }
@@ -410,6 +432,13 @@ YantraClient.prototype._onClose = function (wsConnectionString, event) {
   this.emit('close');
 };
 
+YantraClient.prototype.clearAllState = async function clearAllState () {
+  this.log('clearing world...');
+  if (this.serverConnection) {
+    await clearAll(this);
+  }
+}
+
 YantraClient.prototype.events = {};
 
 /**
@@ -455,10 +484,19 @@ YantraClient.prototype.emit = function (event, data) {
 YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode) {
   let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
   this.log('\n');
+  this.log('¢∞§ ---------REMOTE ENVIRONMENT DETECTED-------- §∞¢');
+  this.log('¢∞§  Your code will run locally, and send state  §∞¢');
+  this.log('¢∞§  to the live AYYO server. This is for dev.   §∞¢');
+  this.log('¢∞§                                              §∞¢');
+  this.log('¢∞§  For production run `yantra deploy` and your §∞¢');
+  this.log('¢∞§  code will run low-latency in the AYYO cloud §∞¢');
+  this.log('¢∞§                                              §∞¢');
   this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
   this.log('¢∞§                                              §∞¢');
   this.log('    ', gameLink);
   this.log('      This link will open the game in browser')
+  this.log('¢∞§                                              §∞¢');
+  this.log('¢∞§     Enjoy!                     Have fun!     §∞¢');
   this.log('¢∞§                                              §∞¢');
   this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
   this.log('\n\n');

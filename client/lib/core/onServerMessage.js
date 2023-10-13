@@ -27,9 +27,11 @@ let onServerMessage = function onServerMessage(data) {
           let copy = Object.assign({}, invalidState);
           delete copy.reason;
           let msg = 'Invalid state:' + JSON.stringify(copy);
-          logs.add(msg, 'error');
+          console.log(msg);
+          //logs.add(msg, 'error');
           let reason = 'Reason: ' + invalidState.reason;
-          logs.add(reason, 'error')
+          console.log(reason)
+          //logs.add(reason, 'error')
         });
         console.log(data.data.invalidStates);
       }
