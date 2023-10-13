@@ -1,5 +1,5 @@
 import config from './config.js';
-import yantra from '@yantra-core/sdk/sdk.js';
+import yantra from '@yantra-core/client';
 import snake from './snake.js';
 
 let Y = yantra.createClient({});
