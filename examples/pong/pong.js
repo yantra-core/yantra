@@ -45,6 +45,24 @@ pong.init = async function pongInit(Y) {
   createBall(Y);
   createScoreboards(Y);
   createWalls(Y);
+
+  Y.on('PLAYER_JOINED', function playerJoined (player) {
+    // When the player joins, assign them a team and color
+    let fillColor = 0xff0000;
+    if (assignedTeam === 'blue') {
+      fillColor = 0x0000ff;
+      assignedTeam = 'red';
+    } else {
+      assignedTeam = 'blue';
+    }
+    // Update the player's fillColor by setting a new state object
+    Y.set({
+      id: player.id,
+      type: 'PLAYER',
+      fillColor: fillColor
+    });
+  });
+
 }
 
 // The collision() function is called each time a collision occurs
@@ -73,28 +91,11 @@ pong.tick = function (gamestate) {
   // We can mutate server state by sending state via `res.send()`
   //
   gamestate.state.forEach(function (state) { // for each existing state in the req
-
-    // You could listen for the `PLAYER_PLAYER_JOIN` events to assign teams
-    // if (state.type === 'PLAYER_PLAYER_JOIN') {}
+    //   console.log(state)
 
     // Instead we just check if the player has been assigned a fillColor ( rename to color )
     if (state.type === 'PLAYER') {
-      if (!state.fillColor) {
-        if (assignedTeam === 'blue') {
-          state.fillColor = 0x0000ff;
-          assignedTeam = 'red';
-        } else {
-          state.fillColor = 0xff0000;
-          assignedTeam = 'blue';
-        }
-        // Update the player's fillColor by sending a new state object
-        /*
-        Y.update(state.id, {
-          type: state.type,
-          fillColor: state.fillColor
-        });
-        */
-      }
+
       // If the Player is pressing an input control ( keyboard, gamepad, mouse, etc )
       if (state.controls && Object.keys(state.controls).length > 0) {
         // moves the player based on req controls
