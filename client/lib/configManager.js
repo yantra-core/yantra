@@ -19,7 +19,7 @@ try {
 
 // Define the path for the Yantra directory
 const yantraDir = path.join(homeDir, '.yantra');
-console.log('yantraDir', yantraDir);
+console.log('Yantra config path:', yantraDir);
 
 // Ensure the Yantra directory exists
 if (!fs.existsSync(yantraDir)) {

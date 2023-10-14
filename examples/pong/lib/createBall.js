@@ -11,12 +11,10 @@ function createBall(Y) {
     width: 364,          // width is required for rectangles, defaults to 100
     mass: 500,          // mass is required, defaults to 9001
     restitution: 1,     // restitution (bounciness) is required, defaults to 1
-    /*
     velocity: {         // set an initial velocity
       x: 9.4,             // resets the X velocity to 0
       y: 9.4             // resets the Y velocity to 0
     }
-    */
   });
 };
 

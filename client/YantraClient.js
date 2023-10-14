@@ -102,13 +102,34 @@ YantraClient.prototype.emitGamestateEvents = function emitGamestateEvents (snaps
   let self = this;
   // iterates through entire incoming gamestate array and checks for EVENT_MESSAGE
   snapshot.state.forEach(function iterateStates(state){
-    if (state.type = 'EVENT_MESSAGE' && state.kind === 'PLAYER_JOINED') {
+
+    //
+    // PLAYER_JOINED / PLAYER_LEFT events
+    //
+    if (state.type === 'EVENT_MESSAGE' && state.kind === 'PLAYER_JOINED') {
       // This is bound to YantraClient.on('PLAYER_JOINED')
       self.emit('PLAYER_JOINED', {
         id: state.nickname, // should be state.target
         type: 'PLAYER'
       });
     }
+
+    if (state.type === 'EVENT_MESSAGE' && state.kind === 'PLAYER_LEFT') {
+      // This is bound to YantraClient.on('PLAYER_JOINED')
+      self.emit('PLAYER_LEFT', {
+        id: state.nickname, // should be state.target
+        type: 'PLAYER'
+      });
+    }
+
+    //
+    // COLLISION EVENTS
+    //
+    if (state.type === 'EVENT_COLLISION') {
+      // This is bound to YantraClient.on('collision', fn)
+      self.emit('collision', state);
+    }
+
   });
 }
 

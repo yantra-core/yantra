@@ -32,6 +32,7 @@ let setWorld = async function setWorld (owner, worldId, worldConfig) {
     world = await this.createWorld(owner, worldId, worldConfig);
     console.log('created new world with config', owner, world, worldConfig);
   } else {
+    console.log('Checking local world config against remote world config');
     // check current config and perform diff update if diff from local
     let diff = deepEquals(world, worldConfig);
     //console.log('world', world);

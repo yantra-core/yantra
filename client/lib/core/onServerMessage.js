@@ -97,10 +97,6 @@ let onServerMessage = function onServerMessage(data) {
       })
     }
 
-    if (thing.type === 'EVENT_COLLISION') {
-      self.emit('collision', thing);
-    }
-
     // temp hack for missing server duration property
     if (thing.type === 'BULLET') {
       // console.log('setting duration', 999)

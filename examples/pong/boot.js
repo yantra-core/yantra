@@ -30,6 +30,8 @@ async function go () {
   //Y.on('collision', pong.collision);
   Y.on('gamestate', pong.tick);
 
+  Y.on('collision', pong.collision);
+
   await Y.connect('pong');
   
 };
