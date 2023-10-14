@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import yantra from '@yantra-core/client';
+import yantra from '@yantra-core/client/client-deploy.js';
 import inquirer from 'inquirer';
 import ProgressBar from 'cli-progress';
 import fs from 'fs';
@@ -15,7 +15,6 @@ const localWorldConfigPath = path.resolve(process.cwd() + '/config.js');
 let argv = min(process.argv.slice(2));
 var deployPath = argv._[0] || process.cwd();
 const excludes = ['.DS_Store', 'node_modules', 'package-lock.json'];
-
 let client = yantra.createClient({});
 
 if (!client.accessToken) {
