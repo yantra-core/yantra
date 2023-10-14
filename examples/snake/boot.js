@@ -17,6 +17,9 @@ async function go () {
   Y.on('gamestate', snake.tick);
 
   await Y.connect('snake');
+
+  Y.welcomeLink(Y.owner, config.mode);
+
   
 };
 

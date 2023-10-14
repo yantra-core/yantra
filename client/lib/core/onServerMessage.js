@@ -124,6 +124,7 @@ let onServerMessage = function onServerMessage(data) {
     // first, check to see if the local cache has never seen this object before, cache miss
     if (typeof self.cache[thing.id] !== 'object') {
       // since we have never seen this object before, copy the entire thing
+      thing.ctime = new Date().getTime();
       self.cache[thing.id] = thing;
     } else {
       // the local cache *has* seen this before, cache hit
