@@ -3,7 +3,7 @@
 import inquirer from 'inquirer';
 import minimist from 'minimist';
 import yantra from '@yantra-core/client';
-import inspector from '../lib/inspector.js';
+import inspector from '../lib/inspector/inspector.js';
 
 async function selectWorld(client) {
   const worlds = await client.list(client.owner);

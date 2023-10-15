@@ -4,8 +4,11 @@
 import yantra from '@yantra-core/client';
 import blessed from 'blessed';
 
-const inspector = {};
+import createColumns from './createColumns.js';
+import createConsoleBox from './createConsoleBox.js';
+import onServerMessage from './onServerMessage.js';
 
+const inspector = {};
 
 inspector.startBlessed = function() {
   this.screen = blessed.screen({
@@ -13,10 +16,10 @@ inspector.startBlessed = function() {
     title: 'Game State Viewer',
   });
 
-  this.consoleBox = this.createConsoleBox();  // Create the console box
+  this.consoleBox = createConsoleBox();  // Create the console box
   this.screen.append(this.consoleBox);  // Append the console box to the screen
 
-  this.createColumns();
+  createColumns(this);
   this.setupKeyBindings();
   this.setupEventListeners();
 
@@ -24,100 +27,6 @@ inspector.startBlessed = function() {
   this.screen.render();
 };
 
-inspector.createConsoleBox = function() {
-  return blessed.box({
-    top: '69%',  // Position the box at the bottom 20% of the screen
-    left: 0,
-    width: '100%',
-    height: '33%',
-    border: { type: 'line' },
-    scrollable: true,
-    keys: true,
-    mouse: true,
-  });
-};
-
-inspector.createColumns = function() {
-  this.column1 = this.createListColumn(0, '33%');
-  this.column2 = this.createListColumn('33%', '34%');
-  this.column3 = this.createBoxColumn('67%', '33%');
-
-
-
-  this.column1.on('focus', () => {
-    this.column1.style.border.fg = 'yellow';  // Choose a high-visibility color
-    this.screen.render();
-  });
-
-  this.column1.on('blur', () => {
-    this.column1.style.border.fg = 'green';  // Revert to the original color
-    this.screen.render();
-  });
-
-  this.column2.on('focus', () => {
-    this.column2.style.border.fg = 'yellow';  // Choose a high-visibility color
-    this.screen.render();
-  });
-
-  this.column2.on('blur', () => {
-    this.column2.style.border.fg = 'green';  // Revert to the original color
-    this.screen.render();
-  });
-
-
-  this.column3.on('focus', () => {
-    this.column3.style.border.fg = 'yellow';  // Choose a high-visibility color
-    this.screen.render();
-  });
-
-  this.column3.on('blur', () => {
-    this.column3.style.border.fg = 'green';  // Revert to the original color
-    this.screen.render();
-  });
-
-
-  this.screen.append(this.column1);
-  this.screen.append(this.column2);
-  this.screen.append(this.column3);
-
-
-
-
-  
-};
-
-let columnHeight = '63%';
-let columnTop = '8%';
-
-inspector.createListColumn = function(left, width) {
-  return blessed.list({
-    top: columnTop,
-    left: left,
-    width: width,
-    height: columnHeight,
-    border: { type: 'line' },
-    style: {
-      selected: { bg: 'green', fg: 'black' },  // Style for the selected row
-      item: { bg: 'black', fg: 'white' },  // Style for other rows
-      cursor: { bg: 'blue', fg: 'white' }  // Style for the cursor
-    },
-    keys: true,
-    mouse: true,
-  });
-};
-
-inspector.createBoxColumn = function(left, width) {
-  return blessed.box({
-    top: columnTop,
-    left: left,
-    width: width,
-    height: columnHeight,
-    border: { type: 'line' },
-    scrollable: true,
-    keys: true,
-    mouse: true,
-  });
-};
 
 inspector.setupKeyBindings = function() {
   this.screen.key(['escape', 'q', 'C-c'], (ch, key) => {
@@ -167,40 +76,19 @@ inspector.setupEventListeners = function() {
 };
 
 
-inspector.handleGamestate = function(data) {
-  this.formattedData = this.formatGameState(data);  // Store the formatted data
-  this.column1.setItems(this.formattedData.collections);
-
-  if (
-    this.column1.selected !== undefined &&
-    this.column2.selected !== undefined &&
-    this.formattedData.collections[this.column1.selected] &&
-    this.formattedData.entities[this.formattedData.collections[this.column1.selected]]
-  ) {
-    const selectedEntity = this.formattedData.entities[this.formattedData.collections[this.column1.selected]][this.column2.selected];
-    const properties = this.formattedData.properties[selectedEntity];
-    let propertiesText = '';
-    for (let prop in properties) {
-      propertiesText += `${prop}: ${properties[prop]}\n`;
-    }
-    this.column3.setContent(propertiesText);
-  }
-  
-  this.screen.render();  // Render every 33 game ticks
-
-};
-
-
 inspector.subscribeToGamestate = async function (worldId) {
+  let self = this;
   this.client = yantra.createClient({
     logger: blessedLogger
     // logger: function noop () {} // replace to silence, default is console.log
   });
   this.client.on('gamestate', (data) => {
     // console.log(this.client.cache)
-    inspector.handleGamestate(this.client.cache);
+    // console.log(self.client.cache)
+    onServerMessage(self, self.client.cache);
   });
   await this.client.connect(worldId);
+  // this.client.welcomeLink(this.client.owner, worldId);
 };
 
 
