@@ -48,6 +48,11 @@ let setWorld = async function setWorld (owner, worldId, worldConfig) {
       console.log("updated", updated);
     }
 
+    // bind the worldConfig to instance scope for convenience
+    this.worldConfig = {
+      room: worldConfig
+    };
+
   }
 
   return true;

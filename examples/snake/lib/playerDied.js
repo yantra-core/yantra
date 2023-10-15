@@ -2,6 +2,7 @@ import snake from '../snake.js';
 
 // when the player dies, destroy the player and all their tail tiles
 function playerDied(player) {
+  console.log('playerDied', player.id);
   let stateUpdates = [];
   stateUpdates.push({
     id: player.id,
@@ -9,7 +10,7 @@ function playerDied(player) {
     destroy: true
   });
   snake.cache[player.id].tail.forEach(function (tailId) {
-    console.log('sending destroy tile event', tailId)
+    // console.log('sending destroy tile event', tailId)
     stateUpdates.push({
       id: tailId,
       type: 'TILE',

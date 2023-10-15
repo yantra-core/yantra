@@ -12,14 +12,13 @@ async function go () {
   } catch (err) {
     console.log(err);
   }
-  
+
   Y.on('connect', snake.init);
   Y.on('gamestate', snake.tick);
 
   await Y.connect('snake');
 
   Y.welcomeLink(Y.owner, config.mode);
-
   
 };
 

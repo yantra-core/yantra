@@ -32,19 +32,12 @@ snake.tick = function (gamestate) {
   // console.log('snake.tick()')
   gamestate.state.forEach(function (state) {
     if (state.type === 'PLAYER') {
-      // moves the player based on req controls
-      // console.log('moving the player', state);
-      //movement(state)
-      let re = movement(state);
-      // console.log('reeee', re)
-      Y.set(re);
-
-      // Handle the tail (trail) of the player
+      Y.set(movement(state));
       Y.set(tail(gamestate.gameTick, state));
     }
 
     if (state.type === 'EVENT_COLLISION') {
-      // console.log(state)
+
       let bodyA = state.states[0];
       let bodyB = state.states[1];
   

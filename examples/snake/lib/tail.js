@@ -1,111 +1,107 @@
 import snake from '../snake.js';
-
 import getSnakeSpeed from './getSnakeSpeed.js';
 
+// Constants
+const BASE_RATE = 32;
+const ADJUSTMENT_FACTOR = 0.5;
+const TAIL_OFFSET = 64;
+
 function getTailDropRate(speed) {
-  const BASE_RATE = 32;  // base tail drop rate
-  const ADJUSTMENT_FACTOR = 0.5;  // for each speed unit increase, how much we adjust the BASE_RATE
-  
-  // As speed increases, the adjustedRate decreases, leading to more frequent tail drops.
-  const adjustedRate = BASE_RATE / (speed * ADJUSTMENT_FACTOR);
-  return 3;
-  return Math.max(adjustedRate, 1);  // ensuring that tail drop rate never goes below 1 ticks
+  const safeSpeed = Math.max(speed, 0.1); // prevent divide by zero
+  const adjustedRate = BASE_RATE / (safeSpeed * ADJUSTMENT_FACTOR);
+  return Math.max(adjustedRate, 1);
 }
 
-function tail(gameTick, player) {
-
-  // function returns an array of state updates
-  // we then pipe these updates to Y.set(stateUpdates)
-  // for more explict control, you may pass Y directly to this function
-  let stateUpdates = [];
-
-  if (typeof snake.cache[player.id].tail === 'undefined') {
-    snake.cache[player.id].tail = [];
-  }
-  let cachedPlayer = snake.cache[player.id];
-  // console.log('cachedPlayer.tail.length', cachedPlayer.tail.length)
-
-  // snake.cache is the local version of the state machine
-  // it will update merge automatically as new states enter the local system
-  // you can read/write to the cache as you please; however it will not be distributed
-  // this is useful for tracking any local gamestate variables that are not distributed
-
-  // Calculate tail position based on the last direction the player moved
+function getTailPosition(player, lastDirection) {
   let tailX = player.x;
   let tailY = player.y;
-  const tailOffset = 64;  // this is the size of the tail tile
 
-  let lastDirection = cachedPlayer.lastDirection;
   // Adjust tail's position based on last direction
-  if (lastDirection.x > 0) { // player moved right
-    tailX -= tailOffset;
-  } else if (lastDirection.x < 0) { // player moved left
-    tailX += tailOffset;
-  } else if (lastDirection.y > 0) { // player moved down
-    tailY -= tailOffset;
-  } else if (lastDirection.y < 0) { // player moved up
-    tailY += tailOffset;
+  if (lastDirection.x > 0) {
+    tailX -= TAIL_OFFSET;
+  } else if (lastDirection.x < 0) {
+    tailX += TAIL_OFFSET;
+  } else if (lastDirection.y > 0) {
+    tailY -= TAIL_OFFSET;
+  } else if (lastDirection.y < 0) {
+    tailY += TAIL_OFFSET;
   }
 
-  // Dynamic tail drop rate based on speed / score
-  let tailDropRate = getTailDropRate(getSnakeSpeed(player.score));
-  tailDropRate = Math.round(tailDropRate);
-  tailDropRate = 33;
-  // console.log('adjusted tailDropRate', tailDropRate)
-  //let tailDropRate = 16; // for now
-  // console.log(gameTick, 'tailDropRate', tailDropRate)
-  if (gameTick % tailDropRate === 0) {
-    const tailTile = {
-      // id: `tail-${player.id}-${Date.now()}`,  // unique id for each tail tile, needed for local tail reference
-      type: 'TILE',
-      shape: 'rectangle',
-      owner: player.id,
-      kind: 'tail',
-      texture: 'tile-titanium',
-      isSensor: true,
-      x: tailX,
-      y: tailY,
-      width: 64,  // Assuming each tile is 32x32, but you can adjust this
-      height: 64,
-      emitCollisionEvents: true // emitCollisionEvents is optional, required for listening to collision events on this state
-    };
-    stateUpdates.push(tailTile);
-   //  cachedPlayer.tail.push(tailTile.id); // TODO: do we need this?
-  }
+  return { tailX, tailY };
+}
 
-  // get current cache from snake.cache and see how many tail tiles we have for player
-  //console.log(snake.cache)
-  let tailCount = 0;
-  let lastTail;
+function generateTailTile(tailX, tailY, ownerId) {
+  return {
+    type: 'TILE',
+    shape: 'rectangle',
+    owner: ownerId,
+    kind: 'tail',
+    texture: 'tile-titanium',
+    isSensor: true,
+    x: tailX,
+    y: tailY,
+    width: TAIL_OFFSET,
+    height: TAIL_OFFSET,
+    emitCollisionEvents: true
+  };
+}
 
-  //console.log('snake.world', snake.world)
-  for (let t in snake.world.TILE) {
-    let tile = snake.world.TILE[t];
-    if (tile.owner === player.id) {
-      tailCount++;
-      if (typeof lastTail === 'undefined') {
-        lastTail = tile;
-      }
-      // console.log(tile.utime)
-      if (tile.utime < lastTail.utime) { // why not ctime?
-        lastTail = tile;
-      }
-    }
-  }
+function pruneExtraTails(tailCount, player, stateUpdates) {
+  // console.log('cache', snake.cache)
+  if (tailCount >= player.score + 3) {
+    // Filtering tiles belonging to the player and of kind 'tail' from the cache
+    const playerTails = Object.values(snake.cache).filter(
+      entity => entity.type === 'TILE' && entity.kind === 'tail' && entity.owner === player.id
+    );
 
-  //  if (tailCount >= player.score + 3) {
-  if (tailCount >= 10) {
-    // Not required?
-    // delete snake.cache[lastTail.id];
-    // delete snake.world.TILE[lastTail.id];
-    if (typeof lastTail !== 'undefined') {
+    if (playerTails.length > 0) {
+      // Identifying the oldest tile by comparing ctime values
+      const oldestTile = playerTails.reduce((oldest, tile) => {
+        if (oldest.ctime < tile.ctime) {
+          return oldest;
+        } else {
+          return tile;
+        }
+      }, playerTails[0]); // Default to the first tile when reducing
+
+      // Enqueue state update to destroy the oldest tail tile
       stateUpdates.push({
-        id: lastTail.id,
+        id: oldestTile.id,
         type: 'TILE',
         destroy: true
       });
     }
+
   }
+}
+
+function tail(gameTick, player) {
+  let stateUpdates = [];
+
+  // Ensure cachedPlayer and its tail exist
+  snake.cache[player.id] = snake.cache[player.id] || {};
+  let cachedPlayer = snake.cache[player.id];
+  cachedPlayer.tail = cachedPlayer.tail || [];
+
+  let { tailX, tailY } = getTailPosition(player, cachedPlayer.lastDirection);
+
+  // Dynamic tail drop rate based on speed / score
+  let tailDropRate = Math.round(getTailDropRate(getSnakeSpeed(player.score)));
+
+  if (gameTick % tailDropRate === 0) {
+    const tailTile = generateTailTile(tailX, tailY, player.id);
+    stateUpdates.push(tailTile);
+    cachedPlayer.tail.push(tailTile.id);
+  }
+
+  // Get tail count from the cache
+  let tailCount = Object.values(snake.cache).filter(
+    entity => entity.type === 'TILE' && entity.kind === 'tail' && entity.owner === player.id
+  ).length;
+
+  // If too many tails, prune the oldest one
+  pruneExtraTails(tailCount, player, stateUpdates);
+
   return stateUpdates;
 }
 
