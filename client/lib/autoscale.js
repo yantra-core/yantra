@@ -2,8 +2,12 @@ import config from '../config/config.js';
 
 import axios from 'axios';
 
-async function autoscale (region, owner, worldId) {
+async function autoscale (region, owner, worldId, env) {
   // this.log('autoscale', region, owner, worldId)
+
+  if (typeof env === 'undefined') {
+    env = 'prod';
+  }
 
   let accessToken = this.accessToken || config.accessToken;
 
@@ -16,9 +20,11 @@ async function autoscale (region, owner, worldId) {
   };
 
   let url = etherspaceEndpoint + `/api/v1/autoscale/${region}/${owner}/${worldId}`;
+  url += `?env=${env}`;
   this.log('POST', url)
   let result = await axios.post(url, {
-    owner: owner
+    owner: owner,
+    env: env
   }, {
     headers: headers
   });
@@ -37,9 +43,9 @@ async function autoscale (region, owner, worldId) {
       throw new Error(msg);
     }
 
-    this.log('attempting to autoscale game...', region, owner, worldId);
+    this.log('attempting to autoscale game...', env, region, owner, worldId);
     await sleep(1000);
-    return this.autoscale(region, owner, worldId);
+    return this.autoscale(region, owner, worldId, env);
   }
   
   

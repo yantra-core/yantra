@@ -72,6 +72,10 @@ function YantraClient(options) {
     this.etherspaceEndpoint = options.etherspaceEndpoint;
   }
 
+  if (options.worldConfig) {
+    this.worldConfig = options.worldConfig;
+  }
+
   if (options.logger) {
     this.log = options.logger;
   } else {
@@ -262,6 +266,8 @@ YantraClient.prototype.connect = async function (worldId) {
   let self = this;
   let wsConnectionString;
 
+  let env = 'dev';
+
   // TODO: remove this from YantraClient class, no minimist required
   // Remark: `process.env.YANTRA_ENV` is set in production to override connect to local websocket server 
   //          This is to ensure low-latency, as the custom world code is run on the same host as the game server
@@ -290,7 +296,7 @@ YantraClient.prototype.connect = async function (worldId) {
     // Call into autoscaler to discover the websocket connection string
     // This will either return an existing connection string, or create a new one
     this.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
-    let world = await this.autoscale(this.region, this.owner, worldId)
+    let world = await this.autoscale(this.region, this.owner, worldId, env)
     this.worldConfig = world[0];
     this.log(world.length, 'server candidate(s) found');
     this.log('Using best available server:', JSON.stringify(this.worldConfig.processInfo, true, 2));
@@ -502,8 +508,11 @@ YantraClient.prototype.emit = function (event, data) {
   }
 }
 
-YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode) {
-  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
+YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
+  if (typeof env === 'undefined') {
+    env = 'dev';
+  }
+  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}&env=${env}`;
   this.log('\n');
   this.log('¢∞§ ---------REMOTE ENVIRONMENT DETECTED-------- §∞¢');
   this.log('¢∞§  Your code will run locally, and send state  §∞¢');
@@ -514,7 +523,9 @@ YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode) {
   this.log('¢∞§                                              §∞¢');
   this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
   this.log('¢∞§                                              §∞¢');
-  this.log('    ', gameLink);
+  this.log('');
+  this.log(gameLink);
+  this.log('');
   this.log('      This link will open the game in browser')
   this.log('¢∞§                                              §∞¢');
   this.log('¢∞§     Enjoy!                     Have fun!     §∞¢');
