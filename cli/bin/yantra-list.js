@@ -6,11 +6,6 @@ import path from 'path';
 import minimist from 'minimist';
 let argv = minimist(process.argv.slice(2));
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const tokenPath = path.resolve(__dirname + '/../config/token.json');
-
 async function go() {
   const client = yantra.createClient({});
 

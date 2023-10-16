@@ -26,7 +26,7 @@ let getWorld = async function getWorld (owner, worldId, worldConfig) {
   let result = await axios.get(url, {
     headers: headers
   });
-  console.log('Found World Config:', result.data); // TODO: sort keys by preference
+  // console.log('Found World Config:', result.data); // TODO: sort keys by preference
   
   return result.data;
 }
