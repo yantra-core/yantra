@@ -10,10 +10,6 @@ let createWorld = async function createWorld (owner, worldId, worldConfig) {
     worldConfig = worldId;
   }
 
-  if (typeof this.owner !== 'undefined') { // TODO: remove
-    owner = this.owner;
-  }
-
   // Define the headers you want to add to the request.
   const headers = {
     'yantra-token': this.accessToken
