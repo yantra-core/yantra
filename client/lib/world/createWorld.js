@@ -17,6 +17,8 @@ let createWorld = async function createWorld (owner, worldId, worldConfig) {
 
   let etherspaceEndpoint = this.etherspaceEndpoint || config.etherspaceEndpoint;
   let url = etherspaceEndpoint + `/api/v1/worlds/${owner}/${worldId}`;
+
+  // bind the worldConfig to instance scope for convenience
   this.worldConfig = {
     room: worldConfig
   };
