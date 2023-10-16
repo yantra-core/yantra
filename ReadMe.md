@@ -15,6 +15,39 @@ npm install -g @yantra-core/cli
 
 Now you can run the `yantra` command on your system.
 
+```
+
+  __     __         _                _____ _      _____ 
+  \ \   / /        | |              / ____| |    |_   _|
+   \ \_/ /_ _ _ __ | |_ _ __ __ _  | |    | |      | |  
+    \   / _` | '_ \| __| '__/ _` | | |    | |      | |  
+     | | (_| | | | | |_| | | (_| | | |____| |____ _| |_ 
+     |_|\__,_|_| |_|\__|_|  \__,_|  \_____|______|_____|
+                                                        
+ 
+Usage:  [options] [command]
+
+Yantra Serverless Physics Platform CLI
+
+Options:
+  -V, --version   output the version number
+  -h, --help      display help for command
+
+Commands:
+  init            Initialize a new world in the current directory
+  clone           Clone a world from the Yantra library
+  deploy          Deploy your physics world
+  list            List your worlds
+  info            Checks current directory for a Yantra world and displays information about it
+  rm              Remove a world
+  whoami          Display the current user
+  login           Login to Yantra using OTP or create an account if it does not exist
+  logout          Logs CLI client out of Yantra
+  recover         Recover your account names by email address
+  help [command]  display help for command
+
+```
+
 
 ## Features
 
@@ -187,7 +220,6 @@ When you upload your code to Yantra, it's executed in our optimized low-latency 
 - **High Performance**: Yantra's backend is fine-tuned to ensure your game logic runs smoothly.
 - **Consistent Framerate**: We prioritize a consistent, high framerate, ensuring your gameplay is fluid and responsive.
 - **Direct Execution**: Your uploaded code runs directly, 1:1, with no modifications or external dependencies. The performance you see locally will mirror what you get in our cloud environment.
-
 
 
 ## Support
