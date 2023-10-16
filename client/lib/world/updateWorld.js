@@ -3,10 +3,6 @@ import axios from 'axios';
 
 let updateWorld = async function updateWorld (owner, worldId, worldConfig) {
 
-  if (typeof this.owner !== 'undefined') { // TODO: remove
-    owner = this.owner;
-  }
-
   // Define the headers you want to add to the request.
   const headers = {
     'yantra-token': this.accessToken

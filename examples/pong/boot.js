@@ -13,22 +13,17 @@ async function go () {
     console.log(err);
   }
 
-
-  // TODO: can we remove this? can sdk bind this scope instead? is scope already bound?
+  // TODO: move this to constructor / remove / update SDK API
   Y.worldConfig = {
     room: config
   };
 
-  // ?? TODO: needs center and topLeft / topRight calculations
-  Y.world = config;
-
   Y.on('connect', pong.init);
 
-  // Y.on('collision' fn) is optional listener, emits all registered collisions
-  // You may also check for `EVENT_COLLISION` type in the gamestate tick ( see snake.js example )
-  //Y.on('collision', pong.collision);
   Y.on('gamestate', pong.tick);
 
+  // Y.on('collision' fn) is optional listener, emits all registered collisions
+  // You may also check for `EVENT_COLLISION` type in the gamestate event snapshot array
   Y.on('collision', pong.collision);
 
   await Y.connect('pong');

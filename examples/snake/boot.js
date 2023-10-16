@@ -13,6 +13,11 @@ async function go () {
     console.log(err);
   }
 
+  // TODO: move this to constructor / remove / update SDK API
+  Y.worldConfig = {
+    room: config
+  };
+
   Y.on('connect', snake.init);
   Y.on('gamestate', snake.tick);
 

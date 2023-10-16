@@ -16,10 +16,6 @@ let setWorld = async function setWorld (owner, worldId, worldConfig) {
     worldConfig = _config;
   }
 
-  if (typeof this.owner !== 'undefined') { // TODO: remove
-    owner = this.owner;
-  }
-
   // console.log('setWorld', owner, worldId, worldConfig);
 
   // get the world first
