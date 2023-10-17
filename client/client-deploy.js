@@ -19,7 +19,7 @@ const sdk = {};
 sdk.createClient = function createClient(options) {
   let config = configManager.readConfig();
   if (!config) {
-    console.log('local config not found.');
+    console.log('A local SDK config not found.');
   } else {
     console.log('SDK Client config:', config)
     options.accessToken = config.token;

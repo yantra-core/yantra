@@ -46,6 +46,10 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
   console.log(responses.worldName, 'initialized successfully!');
   console.log('Run `npm start` or `node boot.js` to start your world.');
   console.log('Run `yantra deploy` to deploy your world to Yantra.');
+  console.log('');
+  console.log('You *must* run `npm install` in order to install Yantra SDK to this path.');
+
+
 }
 
 init.scaffold = async function scaffoldInit() {

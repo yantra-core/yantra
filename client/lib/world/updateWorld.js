@@ -10,7 +10,7 @@ let updateWorld = async function updateWorld (owner, worldId, worldConfig) {
 
   let etherspaceEndpoint = this.etherspaceEndpoint || config.etherspaceEndpoint;
   let url = etherspaceEndpoint + `/api/v1/worlds/${owner}/${worldId}/update`;
-  console.log('updateWorld', url, worldConfig)
+  // console.log('updateWorld', url, worldConfig)
   this.worldConfig = {
     room: worldConfig
   };

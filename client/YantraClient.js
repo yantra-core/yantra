@@ -62,6 +62,7 @@ function YantraClient(options) {
     this.owner = options.owner;
   } else {
     this.owner = 'AYYO-ALPHA-0';
+    console.log('WARNING: no owner specified, using default: ' + this.owner);
   }
 
   if (options.region) {
@@ -509,19 +510,33 @@ YantraClient.prototype.emit = function (event, data) {
 }
 
 YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
+
   if (typeof env === 'undefined') {
     env = 'dev';
   }
-  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}&env=${env}`;
+
+  let headerStr = '--REMOTE ENVIRONMENT DETECTED--';
+  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
+
+  if (env !== 'prod') {
+    gameLink += `&env=${env}`;
+  } else {
+    headerStr = 'PRODUCTION ENVIRONMENT DETECTED';
+  }
+
   this.log('\n');
-  this.log('¢∞§ ---------REMOTE ENVIRONMENT DETECTED-------- §∞¢');
-  this.log('¢∞§  Your code will run locally, and send state  §∞¢');
-  this.log('¢∞§  to the live AYYO server. This is for dev.   §∞¢');
-  this.log('¢∞§                                              §∞¢');
-  this.log('¢∞§  For production run `yantra deploy` and your §∞¢');
-  this.log('¢∞§  code will run low-latency in the AYYO cloud §∞¢');
-  this.log('¢∞§                                              §∞¢');
-  this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  this.log('¢∞§ -------' + headerStr + '------ §∞¢');
+
+  if (env === 'dev') {
+    this.log('¢∞§  Your code will run locally, and send state  §∞¢');
+    this.log('¢∞§  to the live AYYO server. This is for dev.   §∞¢');
+    this.log('¢∞§                                              §∞¢');
+    this.log('¢∞§  For production run `yantra deploy` and your §∞¢');
+    this.log('¢∞§  code will run low-latency in the AYYO cloud §∞¢');
+    this.log('¢∞§                                              §∞¢');
+    this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  }
+
   this.log('¢∞§                                              §∞¢');
   this.log('');
   this.log(gameLink);

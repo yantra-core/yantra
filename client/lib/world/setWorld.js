@@ -20,7 +20,19 @@ let setWorld = async function setWorld (owner, worldId, worldConfig) {
 
   // get the world first
   // console.log('getting world', owner + '/' + worldId)
-  let world = await this.getWorld(owner, worldId);
+  let world;
+  
+  try {
+    world = await this.getWorld(owner, worldId);
+  } catch(err) {
+    if (err && err.response && err.response.status == 401) {
+      console.log('Unauthorized to get world ' + worldId);
+      console.log('Please run `yantra login` to login or register to your account')
+      process.exit();
+    } else {
+      throw new Error('Could not get world ' + owner + '/' + worldId + ' ' + err.message);
+    }
+  }
 
   if (!world) {
     // world doesn't exist, create a new world with the config
@@ -41,7 +53,7 @@ let setWorld = async function setWorld (owner, worldId, worldConfig) {
       console.log('Detected changes, going to update world with local config', worldConfig);
       console.log('diff', diff.changes);
       let updated = await this.updateWorld(owner, worldId, worldConfig);
-      console.log("updated", updated);
+      // console.log("updated", updated);
     }
 
     // bind the worldConfig to instance scope for convenience

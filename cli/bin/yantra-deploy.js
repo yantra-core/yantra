@@ -86,15 +86,23 @@ async function go() {
     console.log(err);
   }
 
+  // since a new deploy is about to happen, we remove active games
+  // this is done so that the freshest code is loaded on the next game start
+  // players connected to the previous server will *not* be disconnected
+  // TODO: remove active games
+  // await client.removeActiveGames(owner, worldName);
+
   // since we are doing a new deploy, we *must* ensure the production config matches local
   // certain world config options are *required* at start-time for Etherspace to allocate a server
   // we do strive to make the majority of config options available at run-time
   // await client.updateWorld(owner, worldName, localConfig);
-
   await client.deploy(owner, worldName, deployPath);
 
   // TODO: should optionaly and by default ping etherspace autoscale endpoint to start server
   // this is the 80% use case where a developer will deploy and want to see the world running
+
+  client.welcomeLink(owner, worldName, 'prod');
+
 }
 
 go();
