@@ -17,6 +17,7 @@ let typeMap = {
   'BODY': 'Bodies'
 };
 
+
 for (let t in typeMap) {
   _cache[typeMap[t]] = {};
 }
@@ -25,6 +26,14 @@ deltaUpdate.clear = function deltaClear () {
   for (let t in typeMap) {
     _cache[typeMap[t]] = {};
   }
+}
+
+deltaUpdate.remove = function deltaRemove (thingy) {
+  if (typeof typeMap[thingy.type] === 'undefined') {
+    return;
+  }
+  // console.log('removing', thingy.type, thingy.id);
+  delete _cache[typeMap[thingy.type]][thingy.id];
 }
 
 //

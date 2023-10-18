@@ -46,6 +46,7 @@ let onServerMessage = function onServerMessage(data) {
       if (typeof world[state.type] === 'object') {
         delete world[state.type][state.id];
       }
+      deltaUpdate.remove(state);
       delete self.cache[state.id];
     });
   }

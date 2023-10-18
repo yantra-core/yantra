@@ -3,6 +3,7 @@ import createWorld from './lib/world/createWorld.js';
 import removeWorld from './lib/world/removeWorld.js';
 import create from './lib/state/create.js';
 import set from './lib/state/set.js';
+import destroy from './lib/state/destroy.js';
 import autoscale from './lib/autoscale.js';
 import applyForce from './lib/state/applyForce.js';
 import setVelocity from './lib/state/setVelocity.js';
@@ -61,8 +62,9 @@ function YantraClient(options) {
   if (options.owner) {
     this.owner = options.owner;
   } else {
-    this.owner = 'AYYO-ALPHA-0';
-    console.log('WARNING: no owner specified, using default: ' + this.owner);
+    // this.owner = 'AYYO-ALPHA-0';
+    console.log('Warning: No owner found.');
+    console.log('Please run `yantra login` to login or register to your account')
   }
 
   if (options.region) {
@@ -149,8 +151,7 @@ YantraClient.prototype.onServerMessage = onServerMessage;
  */
 YantraClient.prototype.create = create; // currently acts as update / create, TODO: should throw error if id exists
 YantraClient.prototype.set = set;
-// Implement remove as wrapper to set with destroy: true property
-// TODO: YantraClient.prototype.remove = remove;
+YantraClient.prototype.destroy = destroy;
 YantraClient.prototype.config = setConfig;
 
 /*
@@ -296,7 +297,6 @@ YantraClient.prototype.connect = async function (worldId) {
   } else {
     // Call into autoscaler to discover the websocket connection string
     // This will either return an existing connection string, or create a new one
-    this.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
     let world = await this.autoscale(this.region, this.owner, worldId, env)
     this.worldConfig = world[0];
     this.log(world.length, 'server candidate(s) found');
@@ -460,12 +460,7 @@ YantraClient.prototype._onClose = function (wsConnectionString, event) {
   this.emit('close');
 };
 
-YantraClient.prototype.clearAllState = async function clearAllState () {
-  this.log('clearing world...');
-  if (this.serverConnection) {
-    await clearAll(this);
-  }
-}
+YantraClient.prototype.clearAllState = clearAll;
 
 YantraClient.prototype.events = {};
 
