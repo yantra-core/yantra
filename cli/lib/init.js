@@ -49,7 +49,6 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
   console.log('');
   console.log('You *must* run `npm install` in order to install Yantra SDK to this path.');
 
-
 }
 
 init.scaffold = async function scaffoldInit() {
@@ -89,6 +88,7 @@ async function shouldOverwrite(file) {
     choices: [
       { name: 'Overwrite', value: 'overwrite' },
       { name: 'Always Overwrite (for all files)', value: 'always' },
+      { name: 'Ignore', value: 'ignore' },
       { name: 'Cancel', value: 'cancel' },
     ],
   }]);
