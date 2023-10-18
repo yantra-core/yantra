@@ -383,6 +383,10 @@ YantraClient.prototype.disconnect = function () {
   return this;
 };
 
+YantraClient.prototype.joinWorld = function () {
+  this.sendJSON({ event: 'player_identified' });
+};
+
 /**
  * Sends a JSON object to the connected server if a connection exists.
  *
