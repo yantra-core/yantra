@@ -4,6 +4,8 @@ let Y = yantra.createClient({});
 
 async function go() {
 
+
+  Y.on('gamestate', tick);
   // connects to existing World
   await Y.connect('my-world');
 
@@ -51,6 +53,12 @@ async function go() {
   }
 
 
+}
+
+function tick (snapshot) {
+  snapshot.state.forEach(function(state){
+    console.log(state)
+  });
 }
 
 go();
