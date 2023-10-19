@@ -2,10 +2,11 @@ let MELEE_FFA = {
   id: 'MELEE_FFA',
   mode: 'MELEE_FFA',
   movement: 'default',
-  scoreIncreasesStats: true,
-  worldWrap: true,
-  border: 'dode',
-  zoneCount: 1,
+  width: 5000,
+  height: 5000,
+  maxPlayers: 111,
+  startingPlanet: 'Earth',
+
   client: {
     batteryBars: true,
     copilotDashboard: true,
@@ -24,29 +25,29 @@ let MELEE_FFA = {
       mode: 'follow'
     },
   },
-  width: 5000,
-  height: 5000,
-  maxPlayers: 111,
+
+  worldWrap: true,
+  border: 'dode',
+  zoneCount: 1,
   etherCount: 66,
   elementCount: 444,
   maxBots: 33,
   botsEnabled: true,
   keyCount: 3,
-  doorCount: 2, // 22
+  doorCount: 2,
+  hexapodCount: 33,
   botHealthRegenRate: 0.1,
-  allianceChecks: false, // false means team-mates can damage each other
-  turretsActive: true,
-  friendlyFire: true, // true means team-mates can damage each other
-  startingPlanet: 'Earth',
-  // aiBehaviors: ['avoidPlanets', 'autoFollow', 'avoidsBunching'],
-  exitWallsEnabled: true,
-  showOctagonStats: false,
-  showScoreOdometer: false,
   botHealth: 55.55,
+  turretsActive: true,
+  exitWallsEnabled: true,
+  
+  allianceChecks: false,
+  friendlyFire: true,
   planetContactDamage: true,
   planetGravity: false,
   powerUpsEnabled: true,
-  hexapodCount: 33,
+  scoreIncreasesStats: true,
+
   ship: {
     engine: {
       THRUST_FORCE: 10.0077 * 0.1888,
@@ -63,6 +64,7 @@ let MELEE_FFA = {
       DAMAGE: 10
     }
   },
+
   zetaQuadrant: {
     id: 'zetaQuadrant',
     x: -88888,
