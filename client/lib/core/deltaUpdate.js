@@ -2,7 +2,7 @@ const deltaUpdate = {};
 
 const _cache = {};
 
-let intProperties = ['x', 'y', 'health', 'energy', 'score', 'kills', 'height', 'width'];
+let intProperties = ['x', 'y', 'velocityX', 'velocityY', 'health', 'energy', 'score', 'kills', 'height', 'width'];
 
 let typeMap = {
   'HEXAPOD': 'Hexapods',
@@ -16,7 +16,6 @@ let typeMap = {
   'TILE': 'Tiles',
   'BODY': 'Bodies'
 };
-
 
 for (let t in typeMap) {
   _cache[typeMap[t]] = {};
