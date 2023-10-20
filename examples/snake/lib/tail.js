@@ -37,7 +37,7 @@ function pruneExtraTails(tailCount, player, stateUpdates) {
   if (tailCount >= player.score + 3) {
     // Filtering tiles belonging to the player and of kind 'tail' from the cache
     const playerTails = Object.values(snake.cache).filter(
-      entity => entity.type === 'TILE' && entity.kind === 'tail' && entity.owner === player.id
+      entity => entity.type === 'BODY' && entity.kind === 'tail' && entity.owner === player.id
     );
 
     if (playerTails.length > 0) {
@@ -53,7 +53,7 @@ function pruneExtraTails(tailCount, player, stateUpdates) {
       // Enqueue state update to destroy the oldest tail tile
       stateUpdates.push({
         id: oldestTile.id,
-        type: 'TILE',
+        type: 'BODY',
         destroy: true
       });
     }
@@ -81,7 +81,7 @@ function tail(gameTick, player) {
   }
 
   let tailCount = Object.values(snake.cache).filter(
-    entity => entity.type === 'TILE' && entity.kind === 'tail' && entity.owner === player.id
+    entity => entity.type === 'BODY' && entity.kind === 'tail' && entity.owner === player.id
   ).length;
 
   pruneExtraTails(tailCount, player, stateUpdates);
@@ -91,12 +91,13 @@ function tail(gameTick, player) {
 
 function generateTailTile(tailX, tailY, ownerId) {
   return {
-    type: 'TILE',
+    type: 'BODY',
     shape: 'rectangle',
     owner: ownerId,
     kind: 'tail',
     texture: 'tile-titanium',
     isSensor: true,
+    isStatic: true,
     x: tailX,
     y: tailY,
     width: TAIL_OFFSET,
@@ -104,6 +105,5 @@ function generateTailTile(tailX, tailY, ownerId) {
     emitCollisionEvents: true
   };
 }
-
 
 export default tail;

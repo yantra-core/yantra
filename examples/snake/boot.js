@@ -13,6 +13,7 @@ async function go () {
     console.log(err);
   }
 
+
   // TODO: move this to constructor / remove / update SDK API
   Y.worldConfig = {
     room: config

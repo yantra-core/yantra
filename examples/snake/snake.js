@@ -18,7 +18,7 @@ snake.init = async function snakeInit(Y) {
 
   console.log('snake.init()');
 
-  Y.config(config);
+  // Y.config(config);
 
   snake.cache = Y.cache;
   snake.world = Y.world;
