@@ -7,8 +7,8 @@ function createBall(Y) {
     emitCollisionEvents: true, // emitCollisionEvents is optional, required for listening to collision events on this state
     x: 100,             // x is required, defaults to 0
     y: 100,             // y is required, defaults to 0
-    height: 364,         // height is required for rectangles, defaults to 100
-    width: 364,          // width is required for rectangles, defaults to 100
+    height: 100,         // height is required for rectangles, defaults to 100
+    width: 100,          // width is required for rectangles, defaults to 100
     mass: 500,          // mass is required, defaults to 9001
     restitution: 1,     // restitution (bounciness) is required, defaults to 1
     velocity: {         // set an initial velocity

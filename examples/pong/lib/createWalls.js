@@ -1,47 +1,30 @@
 // Create the walls of the room, the left and right wall will be goals
 // Remark: You can also use try using `border: "rect"` config option in your World config
 function createWalls(Y) {
-    
-  Y.worldConfig.room.center = {
-    x: 0,
-    y: 0
-  };
-
-  // "topLeft" and "bottomRight" are helpers defined for us based on map size
-  Y.worldConfig.room.topLeft = {
-    x: Y.worldConfig.room.center.x - (Y.worldConfig.room.width),
-    y: Y.worldConfig.room.center.y - (Y.worldConfig.room.height)
-  };
-
-  Y.worldConfig.room.bottomRight = {
-    x: Y.worldConfig.room.center.x + (Y.worldConfig.room.width),
-    y: Y.worldConfig.room.center.y + (Y.worldConfig.room.height)
-  };
 
   // console.log(Y.worldConfig.room)
-
-  const topLeft = Y.worldConfig.room.topLeft;
-  const bottomRight = Y.worldConfig.room.bottomRight;
-
-  const WALL_THICKNESS = 200;
+  const WALL_THICKNESS = 50;
 
   // Define the walls of the room, the left and right wall will be goals
+  let height = Y.worldConfig.room.height;
+  let width = Y.worldConfig.room.width;
+
   const walls = {
     top: {
-      position: { x: (topLeft.x + bottomRight.x) / 2, y: topLeft.y - WALL_THICKNESS / 2 },
-      size: { width: bottomRight.x - topLeft.x + 2 * WALL_THICKNESS, height: WALL_THICKNESS }
+      position: { x: 0, y: -height / 2 - WALL_THICKNESS / 2 },
+      size: { width: width, height: WALL_THICKNESS }
     },
     bottom: {
-      position: { x: (topLeft.x + bottomRight.x) / 2, y: bottomRight.y + WALL_THICKNESS / 2 },
-      size: { width: bottomRight.x - topLeft.x + 2 * WALL_THICKNESS, height: WALL_THICKNESS }
+      position: { x: 0, y: height / 2 + WALL_THICKNESS / 2 },
+      size: { width: width, height: WALL_THICKNESS }
     },
     left: {
-      position: { x: topLeft.x - WALL_THICKNESS / 2, y: (topLeft.y + bottomRight.y) / 2 },
-      size: { width: WALL_THICKNESS, height: bottomRight.y - topLeft.y + 2 * WALL_THICKNESS }
+      position: { x: -width / 2 - WALL_THICKNESS / 2, y: 0 },
+      size: { width: WALL_THICKNESS, height: height }
     },
     right: {
-      position: { x: bottomRight.x + WALL_THICKNESS / 2, y: (topLeft.y + bottomRight.y) / 2 },
-      size: { width: WALL_THICKNESS, height: bottomRight.y - topLeft.y + 2 * WALL_THICKNESS }
+      position: { x: width / 2 + WALL_THICKNESS / 2, y: 0 },
+      size: { width: WALL_THICKNESS, height: height }
     }
   };
 

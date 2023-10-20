@@ -149,4 +149,6 @@ pong.tick = function (gamestate) {
 
 }
 
+pong.movement = movement;
+
 export default pong; // ping
