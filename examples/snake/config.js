@@ -3,8 +3,8 @@ let config = {
   mode: 'snake',
   // movement: 'default',
   border: 'rect', // border is optional, will automatically create a solid / static / impassable border around map size
-  width: 2560 * 2,
-  height: 1440 * 2,
+  width: 2560 * 4,
+  height: 1440 * 4,
   gravity: {
     x: 0,
     y: 0

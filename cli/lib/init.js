@@ -43,6 +43,24 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
   packageJson.description = responses.description;
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
+  // Updates the config.js file with world name
+  const configJsPath = path.join(destDir, 'config.js');
+  if (fs.existsSync(configJsPath)) {
+    let configJsContent = fs.readFileSync(configJsPath, 'utf-8');
+    configJsContent = configJsContent.replace(/my-world/g, responses.worldName);
+    fs.writeFileSync(configJsPath, configJsContent, 'utf-8');
+    console.log('Updated config.js with world name: ' + responses.worldName);
+  }
+
+  // replaces my-world with world name in boot.js
+  const bootJsPath = path.join(destDir, 'boot.js');
+  if (fs.existsSync(bootJsPath)) {
+    let bootJsContent = fs.readFileSync(bootJsPath, 'utf-8');
+    bootJsContent = bootJsContent.replace(/my-world/g, responses.worldName);
+    fs.writeFileSync(bootJsPath, bootJsContent, 'utf-8');
+    console.log('Updated boot.js with world name: ' + responses.worldName);
+  }
+
   console.log(responses.worldName, 'initialized successfully!');
   console.log('Run `npm start` or `node boot.js` to start your world.');
   console.log('Run `yantra deploy` to deploy your world to Yantra.');

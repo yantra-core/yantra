@@ -15,7 +15,10 @@ const TAIL_TICKS = 33;
 const tails = {};
 
 snake.init = async function snakeInit(Y) {
+
   console.log('snake.init()');
+
+  Y.config(config);
 
   snake.cache = Y.cache;
   snake.world = Y.world;
@@ -35,7 +38,7 @@ snake.tick = function (gamestate) {
       Y.set(movement(state));
       Y.set(tail(gamestate.gameTick, state));
     }
-
+    // TODO: refactor collisions into snake.on('collision', (state) => { ... }
     if (state.type === 'EVENT_COLLISION') {
 
       let bodyA = state.states[0];
