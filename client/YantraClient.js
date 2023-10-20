@@ -111,6 +111,14 @@ YantraClient.prototype.emitGamestateEvents = function emitGamestateEvents (snaps
   snapshot.state.forEach(function iterateStates(state){
 
     //
+    // PLAYER MOVEMENT / CONTROL INPUT EVENTS
+    //
+    if (state.type === 'PLAYER' && typeof state.controls === 'object' && Object.keys(state.controls).length > 0) {
+      // console.log('input event emit it', state);
+      self.emit('input', state);
+    }
+
+    //
     // PLAYER_JOINED / PLAYER_LEFT events
     //
     if (state.type === 'EVENT_MESSAGE' && state.kind === 'PLAYER_JOINED') {

@@ -2,7 +2,7 @@ import stateArraySchema from './stateSchema.js';
 import Float2Int from './Float2Int.js';
 import deltaUpdate from "./deltaUpdate.js";
 
-let propertyNames = ['owner', 'nickname', 'type', 'texture', 'faction', 'id', 'x', 'y', 'width', 'height', 'radius', 'rotation', 'mass', 'health', 'energy', 'duration', 'velocityX', 'velocityY', 'fillColor', 'kills', 'score', 'brain', 'maxHealth', 'maxEnergy', 'damage', 'energyRegenRate', 'healthRegenRate', 'thrust', 'rotationSpeed', 'modifiers', 'kind'];
+let propertyNames = ['owner', 'nickname', 'type', 'texture', 'faction', 'id', 'x', 'y', 'width', 'height', 'radius', 'rotation', 'mass', 'health', 'energy', 'duration', 'velocityX', 'velocityY', 'fillColor', 'kills', 'score', 'brain', 'maxHealth', 'maxEnergy', 'damage', 'energyRegenRate', 'healthRegenRate', 'thrust', 'rotationSpeed', 'modifiers', 'kind', 'text'];
 let floatyIntTypes = ['x', 'y', 'width', 'height', 'radius', 'rotation', 'velocity', 'mass', 'health', 'energy', 'duration', 'velocityX', 'velocityY', 'maxHealth', 'maxEnergy', 'damage', 'energyRegenRate', 'healthRegenRate', 'thrust', 'rotationSpeed'];
 let inBrowser = false;
 

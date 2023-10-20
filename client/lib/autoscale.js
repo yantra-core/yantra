@@ -5,6 +5,14 @@ import axios from 'axios';
 async function autoscale (region, owner, worldId, env) {
   // this.log('autoscale', region, owner, worldId)
 
+  if (typeof owner === 'undefined') {
+    let msg = 'Owner not found. Did you run `yantra login` first?';
+    console.log(msg);
+    throw new Error(msg);
+  }
+
+  this.log('autoscaling...', this.region + '/' + this.owner + '/' + worldId);
+
   if (typeof env === 'undefined') {
     env = 'prod';
   }
