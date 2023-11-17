@@ -1,6 +1,6 @@
 {
   "name": "@yantra-core/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI for Yantra.gg Serverless Physics SDK, providing tools for game development and deployment on Node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
