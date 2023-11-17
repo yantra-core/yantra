@@ -1,16 +1,25 @@
 {
-  "name": "@yantra-core/sdk",
-  "version": "0.4.3",
-  "description": "Yantra.gg Serverless Physics SDK for Node",
+  "name": "@yantra-core/yantra",
+  "version": "1.0.0",
+  "description": "Yantra.gg Serverless Physics SDK for Real-time Multiplayer Game Development",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "sdk.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yantra-core/yantra/yantra.git"
+  },
+  "keywords": ["game-development", "serverless", "physics-engine", "multiplayer", "netcode", "game-engine", "sdk", "game-programming", "real-time", "cloud-gaming"],
+  "author": "Yantra Works",
+  "license": "Copyright Yantra Works 2023",
+  "bugs": {
+    "url": "https://github.com/yantra-core/yantra/issues"
+  },
+  "homepage": "https://yantra.gg",
   "dependencies": {
     "@yantra-core/cli": "*",
     "@yantra-core/client": "*"
   },
-  "type": "module",
-  "author": "",
-  "license": "Copyright Yantra Works 2023"
+  "type": "module"
 }

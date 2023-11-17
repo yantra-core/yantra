@@ -50,22 +50,18 @@ async function go() {
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
   const worldName = packageJsonContent.name;
 
-  const localWorldConfig = await getLocalWorldConfig();
-  if (!localWorldConfig) {
-    console.error("Cannot proceed without local world configuration.");
-    process.exit(1);
-  } else {
-    console.log("Using local world configuration:", localWorldConfig);
+  let localWorldConfig = {
+    "id": worldName,
+    "mode": "fun",
+    "width": 2560,
+    "height": 1440,
+    "gravity": {
+      "x": 0,
+      "y": 0
+    },
+    "maxPlayers": 44,
+    "startingPlanet": "_earth_" // placeholder
   }
-
-  /*
-  // Load the game config from the config.js file in the deployPath
-  const configPath = path.join(deployPath, 'config.js');
-  if (!fs.existsSync(configPath)) {
-      console.error('Error: config.js not found in the deploy directory.');
-      return;
-  }
-  */
 
   // Continue with your existing deployment logic
   let outputFilePath = `${worldName}.zip`;

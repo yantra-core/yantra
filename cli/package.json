@@ -1,11 +1,31 @@
 {
   "name": "@yantra-core/cli",
-  "version": "0.4.2",
-  "description": "CLI for Yantra.gg Serverless Physics SDK for Node",
+  "version": "1.0.0",
+  "description": "CLI for Yantra.gg Serverless Physics SDK, providing tools for game development and deployment on Node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "cli.js",
+  "bin": {
+    "yantra": "./bin/yantra.js",
+    "yantra-init": "./bin/yantra-init.js",
+    "yantra-list": "./bin/yantra-list.js",
+    "yantra-login": "./bin/yantra-login.js",
+    "yantra-logout": "./bin/yantra-logout.js",
+    "yantra-deploy": "./bin/yantra-deploy.js",
+    "yantra-whoami": "./bin/yantra-whoami.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yantra-core/yantra/yantra.git"
+  },
+  "keywords": ["game-development", "serverless", "physics-engine", "multiplayer", "netcode", "game-engine", "sdk", "game-programming", "real-time", "cloud-gaming"],
+  "author": "Yantra Works",
+  "license": "Copyright Yantra Works 2023",
+  "bugs": {
+    "url": "https://github.com/yantra-core/yantra/issues"
+  },
+  "homepage": "https://yantra.gg",
   "dependencies": {
     "@yantra-core/client": "*",
     "@yantra-core/examples": "*",
@@ -17,16 +37,5 @@
     "inquirer": "^9.2.11",
     "minimist": "^1.2.8"
   },
-  "bin": {
-    "yantra": "./bin/yantra.js",
-    "yantra-init": "./bin/yantra-init.js",
-    "yantra-list": "./bin/yantra-list.js",
-    "yantra-login": "./bin/yantra-login.js",
-    "yantra-logout": "./bin/yantra-logout.js",
-    "yantra-deploy": "./bin/yantra-deploy.js",
-    "yantra-whoami": "./bin/yantra-whoami.js"
-  },
-  "type": "module",
-  "author": "",
-  "license": "Copyright Yantra Works 2023"
+  "type": "module"
 }
