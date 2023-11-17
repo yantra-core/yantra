@@ -523,7 +523,7 @@ YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
   }
 
   let headerStr = '--REMOTE ENVIRONMENT DETECTED--';
-  let gameLink = `https://ayyo.gg/play?mode=${mode}&owner=${owner}`;
+  let gameLink = `https://yantra.gg/mantra/yantra?mode=${mode}&owner=${owner}`;
 
   if (env !== 'prod') {
     gameLink += `&env=${env}`;
@@ -533,17 +533,6 @@ YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
 
   this.log('\n');
   this.log('¢∞§ -------' + headerStr + '------ §∞¢');
-
-  if (env === 'dev') {
-    this.log('¢∞§  Your code will run locally, and send state  §∞¢');
-    this.log('¢∞§  to the live AYYO server. This is for dev.   §∞¢');
-    this.log('¢∞§                                              §∞¢');
-    this.log('¢∞§  For production run `yantra deploy` and your §∞¢');
-    this.log('¢∞§  code will run low-latency in the AYYO cloud §∞¢');
-    this.log('¢∞§                                              §∞¢');
-    this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
-  }
-
   this.log('¢∞§                                              §∞¢');
   this.log('');
   this.log(gameLink);
@@ -552,7 +541,7 @@ YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
   this.log('¢∞§                                              §∞¢');
   this.log('¢∞§     Enjoy!                     Have fun!     §∞¢');
   this.log('¢∞§                                              §∞¢');
-  this.log('¢∞§ ---------------- AYYO World ---------------- §∞¢');
+  this.log('¢∞§ ----------------   MANTRA   ---------------- §∞¢');
   this.log('\n\n');
 }
 

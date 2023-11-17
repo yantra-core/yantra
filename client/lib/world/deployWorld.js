@@ -45,7 +45,7 @@ async function deployWorld(owner, worldId, appPath) {
 
   console.log('Deployed world', worldId, 'from path', appPath);
 
-  let gameLink = `https://ayyo.gg/play?mode=${worldId}&owner=${owner}`;
+  let gameLink = `https://yantra.gg/mantra/yantra?mode=${worldId}&owner=${owner}`;
   console.log('AYYO World Link', gameLink);
 }
 

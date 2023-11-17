@@ -30,7 +30,7 @@ async function go() {
 
     console.log('Available Worlds:');
     worlds.forEach(function(world) {
-      let gameLink = `https://ayyo.gg/play?mode=${world.mode}&owner=${world.owner}`;
+      let gameLink = `https://yantra.gg/mantra/yantra?mode=${world.mode}&owner=${world.owner}`;
   
       console.log(JSON.stringify(world, null, 2));
       console.log('');
