@@ -1,16 +1,17 @@
 {
   "name": "@yantra-core/client",
-  "version": "0.4.2",
+  "version": "1.0.1",
   "description": "Client for Yantra.gg Serverless Physics SDK for Node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "client.js",
   "dependencies": {
+    "@yantra-core/cli": "^1.0.1",
     "avsc": "^5.7.7",
     "axios": "^1.5.1",
-    "ws": "^8.14.2",
-    "minimist": "^1.2.8"
+    "minimist": "^1.2.8",
+    "ws": "^8.14.2"
   },
   "type": "module",
   "author": "",
