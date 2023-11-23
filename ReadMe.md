@@ -39,7 +39,6 @@ Options:
 
 Commands:
   init            Initialize a new world in the current directory
-  clone           Clone a world from the Yantra library
   deploy          Deploy your physics world
   list            List your worlds
   info            Checks current directory for a Yantra world and displays information about it
@@ -82,21 +81,11 @@ cd my-world
 yantra init
 ```
 
-**Clone existing Yantra World**
-
-*Installs a pre-made World into current directory. Type `yantra clone` to view available Worlds*
-```bash
-yantra clone pong
-cd pong
-npm start
-```
-
 **Deploy World from localhost to cloud**
 
 *Deploys local world to Yantra Cloud. Provides a default game client link via ayyo.gg*
 ```bash
-yantra clone snake
-cd snake
+cd my-world
 yantra deploy
 ```
 

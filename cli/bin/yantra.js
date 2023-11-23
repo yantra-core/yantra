@@ -35,7 +35,7 @@ let owner = 'AYYO-ALPHA-0';
 
 program
   .command('init', 'Initialize a new world in the current directory')
-  .command('clone', 'Clone a world from the Yantra library')
+  //.command('clone', 'Clone a world from the Yantra library')
   .command('deploy', 'Deploy your physics world')
   .command('list', 'List your worlds')
   .command('info', 'Checks current directory for a Yantra world and displays information about it')

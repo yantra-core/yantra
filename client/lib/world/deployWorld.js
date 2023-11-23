@@ -15,38 +15,39 @@ const progressBar = new ProgressBar.SingleBar({
 });
 
 async function deployWorld(owner, worldId, appPath) {
-  const absolutePath = path.resolve(appPath);
-  const outputFilePath = path.resolve(`${worldId}.zip`);
 
-  const formData = new FormData();
-  const zipStream = fs.createReadStream(outputFilePath);
+    const absolutePath = path.resolve(appPath);
+    const outputFilePath = path.resolve(`${worldId}.zip`);
 
-  formData.append('worldZip', zipStream, `${worldId}.zip`);
+    const formData = new FormData();
+    const zipStream = fs.createReadStream(outputFilePath);
 
-  const url = config.etherspaceEndpoint + `/api/v1/worlds/${owner}/${worldId}/deploy`;
-  console.log('Uploading to:', url);
+    formData.append('worldZip', zipStream, `${worldId}.zip`);
 
-  progressBar.start(100, 0);
+    const url = config.etherspaceEndpoint + `/api/v1/worlds/${owner}/${worldId}/deploy`;
+    console.log('Uploading to:', url);
 
-  let accessToken = this.accessToken || config.accessToken;
+    progressBar.start(100, 0);
 
-  await axios.post(url, formData, {
-      headers: {
-          'Content-Type': 'multipart/form-data',
-          'yantra-token': accessToken
-      },
-      onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          progressBar.update(percentCompleted);
-      }
-  });
+    let accessToken = this.accessToken || config.accessToken;
 
-  progressBar.stop();
+    await axios.post(url, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'yantra-token': accessToken
+        },
+        onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            progressBar.update(percentCompleted);
+        }
+    });
 
-  console.log('Deployed world', worldId, 'from path', appPath);
+    progressBar.stop();
 
-  let gameLink = `https://yantra.gg/mantra/yantra?mode=${worldId}&owner=${owner}`;
-  console.log('AYYO World Link', gameLink);
+    console.log('Deployed world', worldId, 'from path', appPath);
+
+    let gameLink = `https://yantra.gg/mantra/yantra?mode=${worldId}&owner=${owner}`;
+    console.log('AYYO World Link', gameLink);
 }
 
 

@@ -19,7 +19,18 @@
     "type": "git",
     "url": "https://github.com/yantra-core/yantra/yantra.git"
   },
-  "keywords": ["game-development", "serverless", "physics-engine", "multiplayer", "netcode", "game-engine", "sdk", "game-programming", "real-time", "cloud-gaming"],
+  "keywords": [
+    "game-development",
+    "serverless",
+    "physics-engine",
+    "multiplayer",
+    "netcode",
+    "game-engine",
+    "sdk",
+    "game-programming",
+    "real-time",
+    "cloud-gaming"
+  ],
   "author": "Yantra Works",
   "license": "Copyright Yantra Works 2023",
   "bugs": {
@@ -27,8 +38,8 @@
   },
   "homepage": "https://yantra.gg",
   "dependencies": {
-    "@yantra-core/client": "*",
-    "@yantra-core/examples": "*",
+    "@yantra-core/client": "^1.0.1",
+    "@yantra-core/starter-blueprint": "^1.0.0",
     "archiver": "^6.0.1",
     "blessed": "^0.1.81",
     "cli-progress": "^3.12.0",

@@ -47,6 +47,15 @@ async function go() {
     return;
   }
 
+
+  // check for existence of server.js file
+  // if missing, throw error
+  const serverJsPath = path.join(deployPath, 'server.js');
+  if (!fs.existsSync(serverJsPath)) {
+    throw new Error('server.js not found in root directory. Are you inside mantra-server directory?');
+  }
+
+
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
   const worldName = packageJsonContent.name;
 

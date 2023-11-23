@@ -43,6 +43,8 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
   packageJson.description = responses.description;
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
+  /*
+  // TODO: add back world config.js files
   // Updates the config.js file with world name
   const configJsPath = path.join(destDir, 'config.js');
   if (fs.existsSync(configJsPath)) {
@@ -51,31 +53,26 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
     fs.writeFileSync(configJsPath, configJsContent, 'utf-8');
     console.log('Updated config.js with world name: ' + responses.worldName);
   }
-
-  // replaces my-world with world name in boot.js
-  const bootJsPath = path.join(destDir, 'boot.js');
-  if (fs.existsSync(bootJsPath)) {
-    let bootJsContent = fs.readFileSync(bootJsPath, 'utf-8');
-    bootJsContent = bootJsContent.replace(/my-world/g, responses.worldName);
-    fs.writeFileSync(bootJsPath, bootJsContent, 'utf-8');
-    console.log('Updated boot.js with world name: ' + responses.worldName);
-  }
+  */
 
   console.log(responses.worldName, 'initialized successfully!');
-  console.log('Run `npm start` or `node boot.js` to start your world.');
+  console.log('');
+  console.log('Change directory to mantra-server or mantra-client and run `npm install` to install dependencies.');
+  console.log('Run `npm start` to start your world.')
   console.log('Run `yantra deploy` to deploy your world to Yantra.');
   console.log('');
-  console.log('You *must* run `npm install` in order to install Yantra SDK to this path.');
+  console.log('You *must* run `npm install` in the specific directory before running `npm start`.');
 
 }
 
 init.scaffold = async function scaffoldInit() {
 
-  const sourceDir = path.resolve(__dirname, '../node_modules/@yantra-core/examples/world');
+  const sourceDir = path.resolve(__dirname, '../node_modules/@yantra-core/starter-blueprint');
 
   const defaultWorldName = path.basename(process.cwd());
 
   await init.configureWorld(sourceDir, defaultWorldName);
+
 }
 
 init.clone = async function cloneInit(worldname) {
@@ -166,8 +163,12 @@ async function copyWithOverwritePrompt(sourceDir, destDir) {
   displayDirectoryTree(sourceDir);
 }
 
-function displayDirectoryTree(basePath, level = 0) {
+function displayDirectoryTree(basePath, level = 0, depth = 1) {
   const entries = fs.readdirSync(basePath);
+
+  if (level >= depth) {
+    return;
+  }
 
   for (const entryName of entries) {
     const entryPath = path.join(basePath, entryName);
