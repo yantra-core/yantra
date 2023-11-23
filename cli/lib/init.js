@@ -57,7 +57,7 @@ init.configureWorld = async function configureWorld(sourceDir, defaultWorldName)
 
   console.log(responses.worldName, 'initialized successfully!');
   console.log('');
-  console.log('Change directory to mantra-server or mantra-client and run `npm install` to install dependencies.');
+  console.log('Run `npm install` to install dependencies.');
   console.log('Run `npm start` to start your world.')
   console.log('Run `yantra deploy` to deploy your world to Yantra.');
   console.log('');
