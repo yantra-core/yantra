@@ -74,6 +74,7 @@ async function go() {
 
   // Continue with your existing deployment logic
   let outputFilePath = `${worldName}.zip`;
+  excludes.push(outputFilePath)
   await client.zip(deployPath, outputFilePath, excludes);
   console.log('outputFilePath', outputFilePath);
   const fileSize = (fs.statSync(outputFilePath).size / (1024 * 1024)).toFixed(2);

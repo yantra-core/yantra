@@ -6,8 +6,6 @@ import config from '../../config/config.js';
 import FormData from 'form-data';
 import ProgressBar from 'cli-progress';
 
-const excludes = ['node_modules', '.git', '.DS_Store'];
-
 function zipWorld(source, out, excludes) {
 
   const archive = archiver('zip', { zlib: { level: 9 } });
