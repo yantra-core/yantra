@@ -516,14 +516,14 @@ YantraClient.prototype.emit = function (event, data) {
   }
 }
 
-YantraClient.prototype.welcomeLink = function welcomeLink(owner, mode, env) {
+YantraClient.prototype.welcomeLink = function welcomeLink(owner, world, env) {
 
   if (typeof env === 'undefined') {
     env = 'dev';
   }
 
   let headerStr = '--REMOTE ENVIRONMENT DETECTED--';
-  let gameLink = `https://yantra.gg/mantra/yantra?mode=${mode}&owner=${owner}`;
+  let gameLink = `https://yantra.gg/mantra/hathora?world=${world}&owner=${owner}`;
 
   if (env !== 'prod') {
     gameLink += `&env=${env}`;
