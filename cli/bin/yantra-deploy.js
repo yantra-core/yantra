@@ -61,7 +61,7 @@ async function go() {
 
   let localWorldConfig = {
     "id": worldName,
-    "mode": "fun",
+    "mode": "my-awesome-world",
     "width": 2560,
     "height": 1440,
     "gravity": {

@@ -95,11 +95,11 @@ init.clone = async function cloneInit(worldname) {
   await init.configureWorld(sourceDir, worldname);
 }
 
-async function shouldOverwrite(file) {
+async function shouldOverwrite(file, path) {
   const { action } = await inquirer.prompt([{
     type: 'list',
     name: 'action',
-    message: `File ${file} already exists. What would you like to do?`,
+    message: `File ${path} already exists. What would you like to do?`,
     choices: [
       { name: 'Overwrite', value: 'overwrite' },
       { name: 'Always Overwrite (for all files)', value: 'always' },
@@ -111,7 +111,8 @@ async function shouldOverwrite(file) {
   return action;
 }
 
-const excludes = ['.DS_Store', 'node_modules', 'package-lock.json'];
+// TODO: use defaults from existing local .gitignore file, merge with excludes
+const excludes = ['.DS_Store', 'node_modules', 'package-lock.json', '.git'];
 
 async function copyWithOverwritePrompt(sourceDir, destDir) {
   let alwaysOverwrite = false;
@@ -138,7 +139,7 @@ async function copyWithOverwritePrompt(sourceDir, destDir) {
         await recursiveCopy(srcPath, destPath);
       } else {
         if (fs.existsSync(destPath) && !alwaysOverwrite) {
-          const action = await shouldOverwrite(entry);
+          const action = await shouldOverwrite(entry, destPath);
 
           if (action === 'cancel') {
             throw new Error('Initialization cancelled.');
